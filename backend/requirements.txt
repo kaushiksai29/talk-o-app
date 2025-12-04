@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+passlib[bcrypt]
+python-jose[cryptography]
+langchain
+langchain-community
+chromadb
+sentence-transformers
+pydantic
+pymongo
+motor
+pytest
+httpx

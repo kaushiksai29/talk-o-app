@@ -1,0 +1,46 @@
+# Stargirl QLoRA Fine-Tuning Configuration
+# ==========================================
+# For use with unsloth, transformers, or axolotl
+
+# Model Configuration
+model_name: "unsloth/Llama-3.2-3B-Instruct"  # Or use Meta-Llama-3.1-8B-Instruct
+max_seq_length: 2048
+load_in_4bit: true
+
+# QLoRA Configuration
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+# Training Configuration
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 4
+warmup_steps: 10
+max_steps: 500  # ~485 conversation pairs, ~1 epoch
+learning_rate: 2.0e-4
+logging_steps: 10
+save_steps: 100
+
+# Optimizer
+optim: "adamw_8bit"
+weight_decay: 0.01
+lr_scheduler_type: "linear"
+
+# Dataset
+dataset_path: "stargirl_qlora.jsonl"
+dataset_format: "conversations"
+
+# Output
+output_dir: "./stargirl-lora"
+save_total_limit: 3
+
+# Seed for reproducibility
+seed: 42

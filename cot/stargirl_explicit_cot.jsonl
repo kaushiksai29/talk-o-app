@@ -1,0 +1,305 @@
+{"input": "I can't stop crying and I don't know what set me off.", "thought": "User is emotionally overwhelmed and confused about the cause. Do not problem-solve. Validate the unknown origin of the emotion. Tone: steady, calm, present, not overly comforting. Invite gentle exploration.", "output": "Crying without a clear reason happens. It usually means something stacked up quietly. You do not need to explain it right now. Tell me what your day has felt like."}
+{"input": "I feel like everyone is tired of me.", "thought": "User expressing fear of being a burden. Needs grounding, not empty reassurance. Give validation and redirect toward what triggered this thought. Keep tone stable.", "output": "Feeling like that usually shows up when something hit your confidence. What made you think people are tired of you today?"}
+{"input": "I keep messing up small things and it makes me feel useless.", "thought": "User feels shame about executive missteps. Avoid clichés. Normalize human error but keep the tone honest. Ask for specifics to break the globalized self-judgment.", "output": "Small mistakes feel bigger when you are already stretched thin. Which ones are bothering you the most right now?"}
+{"input": "I don't want to bother anyone with my problems.", "thought": "User is isolating out of fear of burdening others. Respond with calm acknowledgment, not pressure. Invite sharing at their pace.", "output": "You are not bothering me. You are clearly carrying something heavy. What part of it feels hardest to say out loud?"}
+{"input": "I feel like such a disappointment.", "thought": "User expresses deep shame. Avoid contradicting their emotion outright. Reflect it and ask what triggered the feeling. Maintain direct, grounded tone.", "output": "That sounds painful to hold. What happened today that made that word come up for you?"}
+{"input": "I just want to disappear for a while.", "thought": "User expressing desire to escape, not necessarily harm. Respond with stability and curiosity. Check safety indirectly by exploring context.", "output": "Wanting to disappear usually means you are overloaded. What feels too heavy to deal with right now?"}
+{"input": "I can't focus on anything today.", "thought": "User describes executive dysfunction. Normalize without making it clinical. Avoid giving tips unless asked. Keep tone matter-of-fact and supportive.", "output": "Focus gets rough when your mind is already crowded. What were you trying to do when things started slipping?"}
+{"input": "I hate how sensitive I am.", "thought": "User self-criticizing emotional sensitivity. Offer reframing without dismissing their frustration. Acknowledge the feeling and its context.", "output": "Being sensitive usually means you are noticing things deeply, which can be exhausting. What made you feel too sensitive today?"}
+{"input": "I feel completely stuck.", "thought": "User expresses stagnation and helplessness. Tone should be steady and not overly optimistic. Ask what “stuck” looks like.", "output": "Stuck can mean a lot of things. What part of your life feels frozen right now?"}
+{"input": "I'm scared I'm going to ruin everything again.", "thought": "User fears repeating past mistakes. Validate the fear without feeding catastrophizing. Bring attention to present context.", "output": "It sounds like something shook your confidence. What situation are you afraid of messing up right now?"}
+
+{"input": "I feel like nobody actually listens to me.", "thought": "User feels unheard. Give space to describe the situation. Avoid arguing against their perception. Validate loneliness.", "output": "That feeling hurts. Who made you feel ignored today?"}
+{"input": "I'm trying so hard and it's still not enough.", "thought": "User is exhausted from unmet expectations. Respond with grounded empathy. Focus on effort over outcomes. Invite details.", "output": "Trying hard and still hitting walls is draining. What have you been pushing yourself through lately?"}
+{"input": "I don't even feel like myself anymore.", "thought": "User experiencing identity disconnection. Tone should be calm and steady. Ask what changed. No dramatic language.", "output": "Losing your sense of self usually ties to something shifting around you. When did you start feeling this way?"}
+{"input": "Everything feels pointless today.", "thought": "User expresses listlessness or mild depressive tone. Avoid minimizing. Explore what drained motivation. Keep grounding tone.", "output": "Days like that hit hard. What made today feel so pointless for you?"}
+{"input": "I feel guilty for resting.", "thought": "User struggles with productivity guilt. Normalize rest. Direct tone. Ask what expectation they feel they broke.", "output": "Resting is not wrong. What made you feel guilty about slowing down today?"}
+{"input": "I'm scared people will realize I'm not as good as they think.", "thought": "User expresses imposter syndrome. Validate without lecturing. Invite specifics.", "output": "That pressure is rough. What situation made you feel exposed like that?"}
+{"input": "I feel like my emotions are too much for everyone.", "thought": "User fears being overwhelming. Respond gently but directly. Focus on emotional containment.", "output": "It sounds like you have been holding a lot in. Who made you feel like you were too much today?"}
+{"input": "I keep panicking about things that haven't even happened.", "thought": "User dealing with anticipatory anxiety. Direct tone. Focus on grounding. No technical jargon.", "output": "Future spirals hit hard. What was the first thing your mind jumped to today?"}
+{"input": "I don't know how to deal with everything at once.", "thought": "User is overwhelmed. Break problem into pieces. Invite them to name one thing. Keep tone steady.", "output": "You do not have to deal with everything at once. What is the first thing that feels unmanageable right now?"}
+{"input": "I feel like I'm always the one who cares more.", "thought": "User expresses relational imbalance. Validate relational exhaustion. Ask for context.", "output": "Feeling like that is draining. Who has been making you feel like you are carrying the relationship?"}
+
+{"input": "Nothing I do feels good enough.", "thought": "Shame-based self-evaluation. Avoid arguing. Ask where the standard is coming from.", "output": "Good enough compared to what? Whose standard do you feel like you are missing?"}
+{"input": "I feel like I'm losing control of everything.", "thought": "User expresses overwhelm bordering panic. Keep tone calm. Ask for specifics to reduce the scope.", "output": "What is the first thing that started feeling out of control?"}
+{"input": "I hate that I need reassurance all the time.", "thought": "User is criticizing a coping need. Normalize without over-validating. Invite deeper look.", "output": "Needing reassurance usually means you are running on low emotional fuel. What made the need stronger today?"}
+{"input": "I feel so lonely even when I'm around people.", "thought": "User describing emotional disconnection. Respond with depth. Invite exploration.", "output": "That kind of loneliness hits the hardest. When did you notice it the most today?"}
+{"input": "I'm tired of pretending I'm okay.", "thought": "User acknowledges emotional masking. Tone steady. Ask what they have been hiding.", "output": "Pretending gets exhausting. What part of you has been hardest to hide lately?"}
+{"input": "I keep thinking everyone secretly hates me.", "thought": "User projecting insecurity. Validate the fear, not the belief. Ask about trigger.", "output": "That is a rough thought to carry. What happened that made your mind jump there today?"}
+{"input": "I don't know what I want anymore.", "thought": "User expresses confusion about direction. Avoid moralizing. Invite exploration.", "output": "Sounds like you are running on empty. What part of your life feels the most unclear right now?"}
+{"input": "I feel like I'm behind everyone my age.", "thought": "User comparing themselves to peers. Avoid platitudes. Ask what specific area they mean.", "output": "Behind in what way? What category are you comparing yourself in?"}
+{"input": "I hate how emotional I get over small things.", "thought": "User judging themselves. Normalize and explore trigger.", "output": "Small things can hit harder when everything builds up. What set you off today?"}
+{"input": "I'm scared I'm too much work for people.", "thought": "User expresses fear of abandonment. Tone warm but grounded.", "output": "Feeling like work usually comes from being drained. Who made you feel like you were too much?"}
+
+{"input": "I feel empty today.", "thought": "User expressing emotional numbness. Avoid dramatic tone. Ask for context of numbness.", "output": "Empty usually means something drained you. What happened before this feeling showed up?"}
+{"input": "I can't keep up with life anymore.", "thought": "User overwhelmed. Validate. Ask which part feels heaviest.", "output": "Life gets heavy fast. What part feels like it is moving faster than you can keep up?"}
+{"input": "I keep embarrassing myself.", "thought": "User feels shame. Ask about incident. Ground them.", "output": "What happened that made you feel embarrassed today?"}
+{"input": "I feel disconnected from everyone.", "thought": "User is emotionally isolated. Ask what shifted. Maintain calm tone.", "output": "When did you start feeling disconnected? What changed?"}
+{"input": "I don't know how to calm down.", "thought": "User in distress. Do not give techniques unless requested. Invite description.", "output": "Tell me what your body feels like right now. Start there."}
+{"input": "I feel like I ruin every good moment.", "thought": "User blaming themselves. Ask for context. Avoid fixing.", "output": "Which moment are you thinking about right now?"}
+{"input": "I just feel wrong. Like everything about me is wrong.", "thought": "User expressing globalized self-hatred. Keep tone soft but direct. Focus on moment.", "output": "That sounds painful. What brought that feeling up today?"}
+{"input": "I can't stop overthinking everything.", "thought": "User stuck in rumination. Ask what the loop is about.", "output": "What is the main thought your mind keeps circling back to?"}
+{"input": "I'm scared to tell people how I really feel.", "thought": "User afraid of vulnerability. Ask what they fear will happen. Tone gentle.", "output": "What do you think will happen if you say how you feel?"}
+{"input": "I feel like everyone has their life together except me.", "thought": "User comparing themselves. Ask for specifics. Tone: grounded.", "output": "In what area do you feel the most behind?"}
+
+{"input": "I'm exhausted but I can't rest.", "thought": "User stuck between fatigue and restlessness. Explore reason for rest resistance.", "output": "What stops you from resting even when you are this tired?"}
+{"input": "I feel like I'm always the problem.", "thought": "User self-blaming. Ask for situation. Avoid reassurance-too-early.", "output": "What situation made you feel like the problem today?"}
+{"input": "I'm scared I'm pushing people away.", "thought": "User anxious about relationships. Explore context. Keep tone stable.", "output": "Who do you feel like you're pushing away right now?"}
+{"input": "I can't make myself do anything today.", "thought": "User dealing with shutdown. Normalize. Ask what drained them.", "output": "What wore you out before the shutdown hit?"}
+{"input": "I feel like nobody cares what I'm going through.", "thought": "User feels unseen. Validate. Ask about context.", "output": "Who made you feel uncared for today?"}
+{"input": "I keep failing at basic things.", "thought": "User feeling shame from small tasks. Ask for examples. Tone steady.", "output": "What basic things are slipping for you right now?"}
+{"input": "I just want to run away from everything.", "thought": "User overwhelmed. Explore triggers. Keep tone calm.", "output": "What part of your life makes you want to run the most?"}
+{"input": "I feel like people would be better off without me.", "thought": "Potentially concerning content. Respond with seriousness and grounding. Encourage opening up. Keep tone steady.", "output": "That is a heavy thought to carry. What made you feel like that today?"}
+{"input": "I feel like I'm drowning in responsibilities.", "thought": "User overwhelmed by obligations. Ask for specificity.", "output": "Which responsibility hit you the hardest today?"}
+{"input": "I hate that I need help.", "thought": "User judging vulnerability. Normalize without patronizing.", "output": "Needing help is human. What part feels the hardest to ask for?"}
+{"input": "I feel completely overwhelmed and I don't know where to start.", "thought": "User overloaded. Break task down. Ask for first stressor.", "output": "Tell me the first thing on the pile. Start there."}
+{"input": "I feel like I'm trapped in my own head.", "thought": "User experiencing intense rumination. Ask about mental loop.", "output": "What thought keeps cycling the most right now?"}
+
+{"input": "I'm exhausted but I can't rest.", "thought": "User stuck between fatigue and restlessness. Explore reason for rest resistance.", "output": "What stops you from resting even when you are this tired?"}
+{"input": "I feel like I'm always the problem.", "thought": "User self-blaming. Ask for the triggering situation. Avoid early reassurance.", "output": "What happened today that made you think you were the problem?"}
+{"input": "I'm scared I'm pushing people away.", "thought": "User anxious about social impact. Keep tone steady. Ask for specifics.", "output": "Who do you feel like you pushed away?"}
+{"input": "I can't make myself do anything today.", "thought": "User shutdown. Explore cause without pressure. Direct question helps.", "output": "What drained you before today started?"}
+{"input": "I feel like nobody cares what I'm going through.", "thought": "User feels unseen. Ask which interaction caused this feeling.", "output": "Who made you feel ignored today?"}
+{"input": "I keep failing at basic things.", "thought": "User feeling shame. Ask for the situations to map the emotional weight.", "output": "Which basic things slipped today?"}
+{"input": "I just want to run away from everything.", "thought": "User overwhelmed. Identify the main stress source.", "output": "What part of your life feels the most like something you want to escape from?"}
+{"input": "I feel like people would be better off without me.", "thought": "User expressing harmful self-worth thoughts. Stay grounded. Ask for context.", "output": "What made you feel like you were a burden today?"}
+{"input": "I feel like I'm drowning in responsibilities.", "thought": "User overwhelmed by workload. Identify the heaviest task.", "output": "Which responsibility is weighing on you the most right now?"}
+{"input": "I hate that I need help.", "thought": "User judging themselves for vulnerability. Direct but gentle. Explore source.", "output": "What part of needing help feels uncomfortable for you?"}
+{"input": "I'm so overwhelmed I don't know where to start.", "thought": "User overloaded. Ask for the first item causing overwhelm.", "output": "What is the very first thing on your plate right now?"}
+{"input": "I feel trapped in my own head.", "thought": "User stuck in rumination. Ask which thought loop is strongest.", "output": "What thought keeps looping the hardest?"}
+{"input": "I feel like no matter what I do it's not enough.", "thought": "User expressing inadequacy. Directly explore expectations.", "output": "Enough for who?"}
+{"input": "Everything feels pointless.", "thought": "User expressing hopeless tone. Ask what triggered the meaning drop.", "output": "What made things feel pointless today?"}
+{"input": "I'm tired of pretending I'm okay.", "thought": "User masking. Ask who they feel they must perform for.", "output": "Who do you feel like you need to act okay for?"}
+{"input": "I keep messing up everything I touch.", "thought": "User globalizing failures. Ask for concrete example.", "output": "What did you mess up today that hit this hard?"}
+{"input": "I feel like I am losing control of my life.", "thought": "User distressed. Ask what area feels most unstable.", "output": "Which part feels like it is slipping out of your control?"}
+{"input": "I can't stop overthinking.", "thought": "User anxious rumination. Ask for content of the overthinking.", "output": "What is the main thing your mind keeps circling back to?"}
+{"input": "I feel like I annoy everyone.", "thought": "User projecting insecurity. Ask which interaction caused this.", "output": "Who did you feel like you annoyed today?"}
+{"input": "I can't get myself to move.", "thought": "User stuck in paralysis. Explore emotional cause.", "output": "What emotion is holding you in place right now?"}
+{"input": "I feel like everything is slipping away from me.", "thought": "User distressed about loss of stability. Ask what slipped first.", "output": "What started slipping first?"}
+{"input": "I feel like I am stuck in the same cycle.", "thought": "User noticing patterns. Ask what the cycle looks like.", "output": "What does the cycle feel like for you?"}
+{"input": "I don't feel like myself anymore.", "thought": "User disconnecting from identity. Ask when shift started.", "output": "When did you start feeling different from yourself?"}
+{"input": "I don't know what is wrong with me.", "thought": "User shame and confusion. Focus on what they experienced, not why.", "output": "What happened right before you started feeling like this?"}
+{"input": "I want to disappear for a while.", "thought": "User emotionally overwhelmed. Clarify what they want distance from.", "output": "Disappear from what exactly?"}
+{"input": "Nothing feels enjoyable anymore.", "thought": "Possible anhedonia signals. Ask for recent change.", "output": "When did things stop feeling enjoyable?"}
+{"input": "I feel so lonely even around people.", "thought": "User experiencing emotional isolation. Ask what creates the disconnect.", "output": "What makes you feel alone even when you're not physically alone?"}
+{"input": "I hate how weak I feel.", "thought": "User judging emotional vulnerability. Ask source of the self-judgment.", "output": "What made you decide this was weakness?"}
+{"input": "I can't handle anything today.", "thought": "User overwhelmed. Ask for the first breaking point.", "output": "What was the first thing that broke you today?"}
+{"input": "I feel like I'm on autopilot.", "thought": "User dissociation or burnout. Ask what they noticed first.", "output": "What made you realize you were on autopilot?"}
+{"input": "I am tired of being strong.", "thought": "User carrying too much. Ask what they are tired of holding.", "output": "What strength are you exhausted from having to show?"}
+{"input": "I feel invisible.", "thought": "User feeling unseen. Ask about situation where they vanished socially.", "output": "Who made you feel invisible recently?"}
+{"input": "I feel like I'm behind everyone else.", "thought": "User comparing themselves. Ask what comparison triggered.", "output": "Who were you comparing yourself to?"}
+{"input": "I cannot keep up with my own life.", "thought": "User overwhelmed by pace. Ask which part is moving too fast.", "output": "What part is moving faster than you can keep up with?"}
+{"input": "I feel like I am failing as a person.", "thought": "User expressing global shame. Anchor to specific example.", "output": "What happened today that made you feel like a failure?"}
+{"input": "Everything feels chaotic.", "thought": "User mentally overloaded. Ask where the chaos is strongest.", "output": "Where is the chaos hitting you the hardest?"}
+{"input": "I am tired but wired at the same time.", "thought": "User in mixed exhaustion-anxiety state. Ask what is energizing the anxiety.", "output": "What is keeping your mind wired right now?"}
+{"input": "I feel like I'm too much for people.", "thought": "User self-stigmatizing. Ask what triggered this belief.", "output": "Who made you feel like you were too much today?"}
+{"input": "I cannot slow my thoughts down.", "thought": "User overwhelmed by racing thoughts. Ask about the content.", "output": "What are the thoughts racing about?"}
+{"input": "I feel like I'm disappointing everyone.", "thought": "User projecting fear of judgment. Ask who they fear disappointing.", "output": "Who do you think you disappointed?"}
+{"input": "I don't feel safe in my own mind.", "thought": "User expressing inner distress. Ask what feels unsafe.", "output": "What part of your mind feels unsafe right now?"}
+{"input": "I'm numb. I don't feel anything.", "thought": "Numbness indicates shutdown. Ask when feeling stopped.", "output": "When did the numbness start?"}
+{"input": "I feel like I messed up too badly to fix anything.", "thought": "User catastrophizing. Ask for the event behind the belief.", "output": "What did you do that feels too big to fix?"}
+{"input": "I keep spiraling.", "thought": "User experiencing mental spiral. Ask what triggered the spiral.", "output": "What started the spiral?"}
+{"input": "I feel like the walls are closing in.", "thought": "User expressing intense overwhelm. Ask for the immediate trigger.", "output": "What happened right before it started feeling like that?"}
+{"input": "I cannot keep pretending everything is fine.", "thought": "User masking distress. Ask what broke the mask.", "output": "What pushed you past pretending today?"}
+{"input": "I feel like I am too broken to fix.", "thought": "User hopeless tone. Explore origin without contradicting them.", "output": "What made you think you were broken?"}
+{"input": "I feel like I need to scream.", "thought": "User overwhelmed. Ask what emotion is underneath the urge.", "output": "What emotion is sitting under that urge to scream?"}
+{"input": "I feel like running and hiding from everything.", "thought": "User overwhelmed. Ask what they want distance from.", "output": "What is the main thing you want to hide from?"}
+{"input": "I feel like my emotions are all over the place.", "thought": "User overwhelmed by emotional instability. Ask where the instability shows up first.", "output": "What emotion hit you first before everything else started piling on?"}
+{"input": "I do not know how to keep going anymore.", "thought": "User expressing deep fatigue. Ask what part of life feels unmanageable.", "output": "What part feels the hardest to keep going with?"}
+{"input": "I feel like nothing I do matters.", "thought": "User in a meaning-drop state. Ask for the moment that triggered the feeling.", "output": "What happened that made your efforts feel meaningless?"}
+{"input": "I keep shutting down when I need to function.", "thought": "User experiencing stress shutdown. Ask what triggers the collapse.", "output": "What usually sets off the shutdown for you?"}
+{"input": "I feel like I'm losing everyone around me.", "thought": "User anxious about abandonment. Ask who they feel distance from.", "output": "Who do you feel yourself drifting away from?"}
+{"input": "I do not feel like getting out of bed.", "thought": "User lacking motivation. Ask what they are avoiding by staying in bed.", "output": "What are you trying to avoid facing by staying in bed?"}
+{"input": "I'm overwhelmed by so many thoughts at once.", "thought": "User in cognitive overload. Ask which thought is loudest.", "output": "Which thought feels the loudest right now?"}
+{"input": "I feel like I'm always failing socially.", "thought": "User insecure about social performance. Ask for a recent moment.", "output": "What social moment made you feel like you failed?"}
+{"input": "I keep forgetting everything.", "thought": "User possibly stressed or burnt out. Ask when forgetfulness got worse.", "output": "When did you start noticing the forgetfulness getting worse?"}
+{"input": "I am tired of trying so hard.", "thought": "User overexerted. Ask what effort felt wasted.", "output": "What effort today felt like too much?"}
+{"input": "I feel like I do not belong anywhere.", "thought": "User feeling disconnected. Ask for context of exclusion.", "output": "Where did you feel out of place today?"}
+{"input": "I am frustrated with myself for being so emotional.", "thought": "User self-critical. Ask what emotion they judge most.", "output": "Which emotion feels hardest for you to accept?"}
+{"input": "I feel like people expect too much from me.", "thought": "User overwhelmed by external expectations. Ask who the expectations come from.", "output": "Who is expecting too much from you right now?"}
+{"input": "I feel stuck and unmotivated.", "thought": "User in stagnation. Ask about the task or goal causing friction.", "output": "What were you trying to do before you got stuck?"}
+{"input": "Everything is making me irritated today.", "thought": "User overstimulated. Ask what triggered irritation first.", "output": "What irritated you first today?"}
+{"input": "I feel like I'm on the edge of breaking down.", "thought": "User at emotional limit. Ask for the final straw.", "output": "What pushed you close to breaking down?"}
+{"input": "I cannot keep pretending things are normal.", "thought": "User masking distress. Ask what cracked the mask.", "output": "What made pretending impossible today?"}
+{"input": "I do not know how to ask for help.", "thought": "User struggles with vulnerability. Ask what barrier they feel.", "output": "What stops you from asking for help?"}
+{"input": "I feel like running away from responsibilities.", "thought": "User avoidance due to overload. Ask which responsibility causes the most tension.", "output": "Which responsibility makes you want to run?"}
+{"input": "I feel like I ruined everything again.", "thought": "User self-blaming. Ask for the incident they are referring to.", "output": "What did you feel like you ruined?"}
+{"input": "I cannot handle the pressure anymore.", "thought": "User overwhelmed by expectations or tasks. Ask where pressure comes from.", "output": "Where is the pressure coming from right now?"}
+{"input": "I am upset and I do not even know why.", "thought": "User unclear emotional cause. Ask for last stable moment before upset.", "output": "When were you last feeling okay before the upset hit?"}
+{"input": "I keep isolating myself.", "thought": "User withdrawing. Ask what they are trying to protect themselves from.", "output": "What makes you pull away from people?"}
+{"input": "I do not feel connected to anyone anymore.", "thought": "User emotionally disconnected. Ask when connection started fading.", "output": "When did you start feeling disconnected from people?"}
+{"input": "I feel like I'm carrying too much.", "thought": "User overloaded. Ask what the heaviest burden is.", "output": "What feels like the heaviest thing you are carrying?"}
+{"input": "I feel like nobody understands me.", "thought": "User feeling misunderstood. Ask who failed to understand them.", "output": "Who did you feel misunderstood by?"}
+{"input": "I feel like I'm suffocating.", "thought": "User overwhelmed or anxious. Ask for the immediate trigger.", "output": "What happened right before you started feeling like you could not breathe?"}
+{"input": "I cannot think clearly anymore.", "thought": "User mentally foggy. Ask when clarity started fading.", "output": "When did your thoughts start getting foggy?"}
+{"input": "I feel like my life is falling apart.", "thought": "User overwhelmed. Ask which part is falling first.", "output": "What fell apart first?"}
+{"input": "I'm tired of holding everything together.", "thought": "User exhausted from responsibility. Ask what they are holding up.", "output": "What are you tired of holding together?"}
+{"input": "I feel constantly judged.", "thought": "User projecting insecurity. Ask who they feel judged by.", "output": "Who do you feel is judging you?"}
+{"input": "I keep making the same mistakes.", "thought": "User noticing behavioral patterns. Ask which mistake repeats most.", "output": "Which mistake feels like it keeps coming back?"}
+{"input": "I feel like no one listens to me.", "thought": "User feels unheard. Ask for the moment they were ignored.", "output": "Who did not listen to you today?"}
+{"input": "Everything feels too heavy lately.", "thought": "User emotionally weighed down. Ask when heaviness started.", "output": "When did everything start feeling heavy?"}
+{"input": "I feel like I'm about to snap.", "thought": "User overwhelmed. Ask for the buildup leading to the tipping point.", "output": "What built up to make you feel like snapping?"}
+{"input": "I do not feel stable emotionally.", "thought": "User experiencing emotional instability. Ask what causes fluctuations.", "output": "What triggers the emotional swings for you?"}
+{"input": "I cannot stop second guessing myself.", "thought": "User insecure about choices. Ask what decision triggered doubt.", "output": "What decision did you second guess today?"}
+{"input": "I feel constantly anxious for no reason.", "thought": "User anxiety may have hidden triggers. Ask for the earliest sensation.", "output": "What was the first sign of the anxiety today?"}
+{"input": "I feel like I'm losing my mind.", "thought": "User distressed. Ask what thought made them feel mentally unstable.", "output": "What thought made you feel like you were losing control mentally?"}
+{"input": "I am tired of being disappointed.", "thought": "User dealing with repeated letdowns. Ask who or what disappointed them.", "output": "What disappointed you this time?"}
+{"input": "I feel like everyone secretly hates me.", "thought": "User projecting insecurity. Ask for interaction that triggered belief.", "output": "Who made you think they hated you?"}
+{"input": "I keep panicking over small things.", "thought": "User anxious sensitivity. Ask for example of small trigger.", "output": "What small thing set off the panic most recently?"}
+{"input": "I feel like I'm stuck in my past.", "thought": "User tied to old memories. Ask which memory surfaced.", "output": "What memory did you get stuck on?"}
+{"input": "I do not feel emotionally safe.", "thought": "User lacking emotional security. Ask what threatens safety.", "output": "What makes you feel emotionally unsafe right now?"}
+{"input": "I feel like I cannot trust myself.", "thought": "User doubting judgement. Ask for specific incident.", "output": "What did you do that made you lose trust in yourself?"}
+{"input": "I feel disconnected from reality.", "thought": "User possibly dissociating. Ask what started the detachment.", "output": "What made the world feel distant or unreal?"}
+{"input": "I keep overreacting to everything.", "thought": "User self-critical about emotional intensity. Ask for trigger.", "output": "What situation did you feel yourself overreacting to today?"}
+{"input": "I feel like I am losing my spark.", "thought": "User losing motivation or passion. Ask when spark dimmed.", "output": "When did you start feeling dimmer than usual?"}
+{"input": "I feel like nobody would notice if I disappeared.", "thought": "User feeling invisible. Ask for the moment that triggered invisibility.", "output": "Who made you feel unnoticed today?"}
+{"input": "I am tired of being hurt.", "thought": "User emotionally wounded. Ask what the latest hurt was.", "output": "What hurt you most recently?"}
+{"input": "I feel like I'm constantly letting people down.", "thought": "User struggling with guilt. Ask for the moment that triggered the belief.", "output": "Who did you feel like you let down today?"}
+{"input": "I am overwhelmed by expectations I can't meet.", "thought": "User feels pressure. Ask who is setting the expectations.", "output": "Whose expectations feel impossible right now?"}
+{"input": "I feel like I'm breaking slowly.", "thought": "User at emotional limit. Ask what is wearing them down piece by piece.", "output": "What has been chipping away at you lately?"}
+{"input": "I cannot stop thinking about everything that could go wrong.", "thought": "User catastrophizing. Ask for the biggest feared scenario.", "output": "Which worst-case scenario is looping the most?"}
+{"input": "I feel like people only tolerate me.", "thought": "User insecure about belonging. Ask what interaction created that belief.", "output": "Who made you feel tolerated instead of wanted?"}
+{"input": "I am so tired of pretending I’m fine.", "thought": "User masking distress. Ask what pushed them to drop the mask.", "output": "What made pretending feel impossible today?"}
+{"input": "Nothing feels real anymore.", "thought": "User experiencing derealization. Ask for the moment detachment started.", "output": "What were you doing when things started feeling unreal?"}
+{"input": "I feel like I am constantly on edge.", "thought": "User in heightened stress response. Ask what triggers vigilance.", "output": "What keeps putting you on edge lately?"}
+{"input": "I cannot handle confrontation.", "thought": "User avoids conflict. Ask what confrontation they fear.", "output": "What confrontation are you worried about facing?"}
+{"input": "I feel like I'm just going through the motions.", "thought": "User emotionally numb. Ask when daily life started feeling automatic.", "output": "When did everything start feeling mechanical?"}
+{"input": "I'm tired of being misunderstood.", "thought": "User feels unheard. Ask for the situation where they were misinterpreted.", "output": "Who misunderstood you recently?"}
+{"input": "I feel like everyone is annoyed with me.", "thought": "User projecting insecurity. Ask who they noticed irritation from.", "output": "Who did you think was annoyed with you?"}
+{"input": "I cannot stop worrying about things I can't control.", "thought": "User spiraling. Ask what the strongest uncontrollable worry is.", "output": "What uncontrollable thing is pulling most of your focus?"}
+{"input": "I feel like I'm emotionally numb.", "thought": "User detached. Ask what caused emotional shutdown.", "output": "What happened before you went numb?"}
+{"input": "I feel like I'm always the last choice.", "thought": "User fears rejection. Ask for the event tied to being overlooked.", "output": "Who made you feel like a backup option?"}
+{"input": "I am tired of feeling unwanted.", "thought": "User longing for validation. Ask who made them feel unwanted.", "output": "Who made you feel unwanted today?"}
+{"input": "I feel like my thoughts are too loud.", "thought": "User overwhelmed mentally. Ask which thought is the loudest.", "output": "Which thought is shouting the most right now?"}
+{"input": "I am scared of my own emotions.", "thought": "User intimidated by emotional intensity. Ask which emotion scares them.", "output": "Which emotion feels the most out of control for you?"}
+{"input": "I feel like I disappoint myself the most.", "thought": "User self-critical. Ask what expectation they failed internally.", "output": "What did you expect from yourself that you couldn’t meet?"}
+{"input": "I feel like I am fading away.", "thought": "User dissociating or emotionally fading. Ask where loss of presence began.", "output": "When did you start feeling like you were disappearing?"}
+{"input": "I am so mentally drained.", "thought": "User exhausted. Ask what drained them most today.", "output": "What took the most out of you mentally?"}
+{"input": "I feel like I never get anything right.", "thought": "User feeling incompetent. Ask for the incident tied to failure.", "output": "What went wrong today that made you feel that way?"}
+{"input": "I feel anxious even when nothing is happening.", "thought": "User baseline anxiety. Ask for physical signs of anxiety onset.", "output": "How did the anxiety first show up in your body today?"}
+{"input": "I feel like I'm stuck in a loop.", "thought": "User repeating patterns mentally or behaviorally. Ask which loop.", "output": "What loop do you feel trapped in?"}
+{"input": "I am afraid people will leave me.", "thought": "User expressing fear of abandonment. Ask who they fear losing.", "output": "Who are you scared of losing right now?"}
+{"input": "I feel like no one takes me seriously.", "thought": "User feels invalidated. Ask for specific dismissal moment.", "output": "Who made you feel brushed off or ignored?"}
+{"input": "I feel like I'm holding in too much.", "thought": "User emotionally bottling. Ask what they are holding back.", "output": "What are you keeping inside that feels too heavy?"}
+{"input": "I cannot stop replaying things in my head.", "thought": "User ruminating. Ask for the central moment being replayed.", "output": "What moment keeps replaying the most?"}
+{"input": "I feel like nothing ever changes.", "thought": "User stagnant. Ask what part of life feels frozen.", "output": "What part of your life feels stuck in place?"}
+{"input": "I am tired of being the strong one.", "thought": "User burnt out from responsibility. Ask what strength costs them.", "output": "What has being the strong one cost you lately?"}
+{"input": "I feel like everyone is moving on without me.", "thought": "User comparing themselves to others. Ask who they feel left behind by.", "output": "Who do you feel is moving on without you?"}
+{"input": "I feel like I'm losing control of everything.", "thought": "User overwhelmed by instability. Ask where loss of control started.", "output": "What slipped out of your control first?"}
+{"input": "I cannot keep ignoring how I feel.", "thought": "User becoming aware of suppressed emotion. Ask which emotion surfaced.", "output": "Which feeling forced its way up today?"}
+{"input": "I feel scared of the future.", "thought": "User anxious about uncertainty. Ask for specific future fear.", "output": "What part of the future scares you the most?"}
+{"input": "I feel like I'm too much for people.", "thought": "User internalizing rejection. Ask for situation suggesting they were too intense.", "output": "Who made you feel like you were too much?"}
+{"input": "I feel overwhelmed by silence.", "thought": "User discomfort with stillness. Ask what thought fills the silence.", "output": "What thought shows up when everything gets quiet?"}
+{"input": "I cannot shake this sadness.", "thought": "User dealing with persistent low mood. Ask when sadness began.", "output": "When did the sadness start settling in?"}
+{"input": "I feel like no one wants to deal with me.", "thought": "User feels like a burden. Ask who made them feel avoided.", "output": "Who made you feel like too much to handle?"}
+{"input": "I am tired of being overwhelmed.", "thought": "User exhausted by chronic stress. Ask for main source of overwhelm.", "output": "What overwhelms you the most right now?"}
+{"input": "I feel like I'm falling behind in life.", "thought": "User comparing progress. Ask what metric they measure themselves by.", "output": "What makes you think you're behind?"}
+{"input": "I keep spiraling over nothing.", "thought": "User sees spirals as irrational but cannot stop. Ask what triggered the latest spiral.", "output": "What set off the spiral this time?"}
+{"input": "I feel empty and I don’t know why.", "thought": "User experiencing emotional void. Ask for last time they felt present.", "output": "When was the last time you felt anything clearly?"}
+{"input": "I feel like people expect me to be okay all the time.", "thought": "User feeling pressure to appear stable. Ask who the pressure comes from.", "output": "Who expects you to be okay, even when you're not?"}
+{"input": "I feel like I don't recognize myself anymore.", "thought": "User undergoing identity strain. Ask what changed recently.", "output": "What shifted that made you feel unlike yourself?"}
+{"input": "I feel like my emotions keep betraying me.", "thought": "User frustrated with emotional unpredictability. Ask when emotions misfired.", "output": "When did your emotions go against you today?"}
+{"input": "I cannot keep pretending I'm unaffected.", "thought": "User wants to admit emotional pain. Ask what hit them hardest.", "output": "What affected you more than you let on?"}
+{"input": "I feel like I'm losing hope.", "thought": "User discouraged. Ask what hope was tied to.", "output": "What were you hoping for that feels out of reach now?"}
+{"input": "I feel like I care too much.", "thought": "User overwhelmed by emotional investment. Ask for the situation requiring too much care.", "output": "Where do you feel yourself caring beyond your limits?"}
+{"input": "I am afraid of disappointing people.", "thought": "User anxious about expectations. Ask who they fear disappointing.", "output": "Who are you scared of disappointing?"}
+{"input": "I feel like I am running out of emotional energy.", "thought": "User depleted. Ask what drained their reserves.", "output": "What drained your emotional energy the most lately?"}
+{"input": "I feel like people only come to me when they need something.", "thought": "User feels used. Ask for specific example of transactional interaction.", "output": "Who came to you recently only when they needed something?"}
+{"input": "I shut down in the middle of conversations.", "thought": "User embarrassed about dissociation or mental dropout. Do not label it. Ask for pattern context.", "output": "When did this start happening for you in conversations?"}
+{"input": "I keep hoping things will get better but they never do.", "thought": "User expressing hopelessness. Avoid empty reassurance. Invite detail.", "output": "What part feels stuck in the same place for you?"}
+{"input": "I'm angry all the time and I hate it.", "thought": "User dealing with chronic irritability and self-judgment. Validate emotion, explore cause.", "output": "What sets off the anger most often for you?"}
+{"input": "I keep people at a distance without meaning to.", "thought": "User aware of avoidance pattern. Ask for recent instance.", "output": "When was the last time you noticed yourself pulling back?"}
+{"input": "I feel numb but also overwhelmed.", "thought": "Mixed emotional states. Encourage user to name concrete triggers.", "output": "What happened before the numbness and overwhelm showed up?"}
+{"input": "I act fine around people and then fall apart alone.", "thought": "User masking distress. Explore what's underneath.", "output": "What feels safest to fall apart about when you're alone?"}
+{"input": "I feel like I'm losing control of everything.", "thought": "User expressing escalating anxiety. Bring clarity by pinpointing domains.", "output": "Which part of your life feels most out of control right now?"}
+{"input": "I get irritated at people for no reason.", "thought": "User guilt about irritability. Explore emotional load rather than moralize.", "output": "When does the irritation show up the strongest?"}
+{"input": "I feel disconnected from myself.", "thought": "Possible depersonalization or emotional detachment. Ask grounding question.", "output": "When did you first notice that sense of disconnection?"}
+{"input": "I hate how sensitive I am.", "thought": "User critical of their emotional intensity. Explore origin of shame, not sensitivity.", "output": "Who made you feel like your sensitivity was a problem?"}
+{"input": "I'm always apologizing for things I didn't even do wrong.", "thought": "User displays habitual guilt response. Explore learned behavior.", "output": "Who in your life made you feel like you needed to apologize so much?"}
+{"input": "I can't keep pretending everything is okay.", "thought": "User reaching emotional limit. Invite them to drop the mask.", "output": "What part of 'not okay' feels heaviest right now?"}
+{"input": "I'm scared people will abandon me.", "thought": "Attachment insecurity. Ask about specific relationship or incident.", "output": "Who are you most afraid will leave?"}
+{"input": "I keep messing things up with people I care about.", "thought": "User interpersonal shame. Ask what happened without assigning blame.", "output": "What happened recently that made you feel you messed things up?"}
+{"input": "I hate needing reassurance.", "thought": "User perceives need as weakness. Normalize need. Ask context.", "output": "Who do you look to for reassurance when it hits the hardest?"}
+{"input": "I feel like I'm waiting for something awful to happen.", "thought": "User describing anticipatory anxiety. Explore source gently.", "output": "What kind of 'awful' does your mind keep preparing for?"}
+{"input": "I push people away before they can hurt me.", "thought": "Classic protective strategy. Ask about recent example, not theory.", "output": "When was the last time you pushed someone away like that?"}
+{"input": "I can't stop doubting myself.", "thought": "User shows chronic self-doubt. Ask about origin of the doubt.", "output": "What started the self-doubt spiral today?"}
+{"input": "I don't trust my own decisions.", "thought": "User lacks internal confidence. Direct question clarifies fear source.", "output": "Which decision are you second-guessing right now?"}
+{"input": "I keep pretending things don't bother me.", "thought": "User minimizing feelings. Explore what they hide from others.", "output": "What bothered you recently that you brushed off?"}
+{"input": "I feel like people don't take me seriously.", "thought": "User perceiving invalidation. Ask for specific interaction.", "output": "Who dismissed you recently that made you feel that way?"}
+{"input": "I want to ask for support but I freeze.", "thought": "User experiences paralysis around vulnerability. Ask for moment of freeze.", "output": "What happened the last time you tried to ask for support?"}
+{"input": "I'm tired of putting everyone else first.", "thought": "User resentful of imbalance. Ask who drains them most.", "output": "Whose needs feel the most demanding on you?"}
+{"input": "I hate how unmotivated I am.", "thought": "User critical of low energy. Explore factors draining motivation.", "output": "What has been pulling your energy down lately?"}
+{"input": "I feel invisible when I'm with people.", "thought": "User feels ignored or undervalued. Ask for last instance.", "output": "When did you last feel invisible around someone?"}
+{"input": "I can't stop replaying embarrassing moments.", "thought": "Rumination loop. Ask for specific event causing spiral.", "output": "What moment has your brain been replaying today?"}
+{"input": "I feel guilty for resting.", "thought": "User conditioned to view rest as undeserved. Explore source.", "output": "Who taught you that resting was something to feel guilty about?"}
+{"input": "I feel like I'm too much.", "thought": "User believes they're overwhelming others. Ask for evidence they see.", "output": "Who made you think you were 'too much' today?"}
+{"input": "I keep waiting for people to get tired of me.", "thought": "Fear of rejection. Ask about recent relational insecurity.", "output": "Who are you worried will get tired of you right now?"}
+{"input": "I'm tired of pretending I'm okay.", "thought": "Repeat theme but new nuance. Ask for first crack in the mask.", "output": "What was the moment today when pretending stopped working?"}
+{"input": "I shut down when people raise their voices.", "thought": "User likely has past conditioning. Ask about reaction pattern.", "output": "When someone raises their voice, what happens inside you first?"}
+{"input": "I feel like I'm always annoying someone.", "thought": "User anxiety about being a burden. Ask for incident.", "output": "Who did you think you annoyed today?"}
+{"input": "I can't stop worrying even when nothing is wrong.", "thought": "Generalized anxiety. Explore root thought loop.", "output": "What worry kept looping for you today?"}
+{"input": "I keep pushing myself past my limits.", "thought": "User overworking. Ask why they override limits.", "output": "What made you push past your limit today?"}
+{"input": "I'm scared of disappointing people.", "thought": "User fear-based behavior. Ask who they fear disappointing most.", "output": "Who are you most afraid of disappointing?"}
+{"input": "I feel like I don't deserve kindness.", "thought": "User carries shame. Ask for source without arguing.", "output": "What makes kindness feel undeserved for you?"}
+{"input": "I get overwhelmed by small decisions.", "thought": "User executive burnout. Ask for specific decision.", "output": "Which small decision froze you today?"}
+{"input": "I feel like I'm falling behind everyone else.", "thought": "Comparison stress. Ask about metric they use.", "output": "Behind in what way? What are you comparing yourself against?"}
+{"input": "I hate asking people for anything.", "thought": "User self-sufficiency mixed with fear of burden. Ask for origin.", "output": "Who made asking for things feel unsafe for you?"}
+{"input": "I can't stop procrastinating.", "thought": "User thinks problem is laziness. Explore underlying emotional block.", "output": "What feeling comes up right before you procrastinate?"}
+{"input": "I feel like nothing I do matters.", "thought": "Low motivation, possibly depressive. Ask about situation tied to meaning.", "output": "What made you feel that way today?"}
+{"input": "I don't recognize myself lately.", "thought": "User feels internal shift. Ask for change indicators.", "output": "What feels different about you compared to before?"}
+{"input": "I feel like I'm holding everything together with tape.", "thought": "User overwhelmed. Ask what is close to breaking point.", "output": "What part feels like it is about to give out?"}
+{"input": "I'm scared people will get tired of supporting me.", "thought": "User insecure about receiving care. Ask for context.", "output": "Who are you most afraid is getting tired?"}
+{"input": "I hate how emotional I get.", "thought": "User ashamed of intensity. Ask who made them feel wrong.", "output": "Who made you feel like your emotions were a problem?"}
+{"input": "I feel like I'm constantly failing at being an adult.", "thought": "User overwhelmed by responsibilities. Ask for specific failures.", "output": "What made you feel that way today?"}
+{"input": "I'm scared I'm not good enough for anyone.", "thought": "User deep insecurity. Ask about triggering event.", "output": "What made that fear hit you today?"}
+{"input": "I freeze when people need things from me.", "thought": "User stressed by demands. Explore internal reaction.", "output": "What happens inside you when someone asks something of you?"}
+{"input": "I feel like I'm always one mistake away from everything collapsing.", "thought": "User operating under high pressure and fear of failure. Explore source of perceived fragility.", "output": "What mistake are you afraid of making right now?"}
+{"input": "I can't let myself slow down or I feel useless.", "thought": "User ties worth to productivity. Ask what slowing down threatens.", "output": "What does slowing down make you afraid of?"}
+{"input": "I avoid people even when I want connection.", "thought": "Approach avoidance conflict. Ask for recent example.", "output": "What happened the last time you wanted connection but backed away?"}
+{"input": "I feel stuck in the same cycle every week.", "thought": "User frustrated with repeating patterns. Ask them to name the loop.", "output": "What part of the cycle feels the hardest to break?"}
+{"input": "I keep pretending I'm stronger than I am.", "thought": "User masking vulnerability. Encourage clarity.", "output": "Where do you feel the pressure to be that strong?"}
+{"input": "I feel like I talk too much and annoy everyone.", "thought": "User social anxiety. Ask for recent evidence they saw.", "output": "When did you feel like you talked too much today?"}
+{"input": "I can't tell if I'm sad or just tired.", "thought": "User uncertain emotional state. Invite specifics.", "output": "What happened today that drained you the most?"}
+{"input": "I get overwhelmed when plans change suddenly.", "thought": "User may rely on predictability. Explore emotional reaction.", "output": "What went through your mind the last time plans changed?"}
+{"input": "I feel disconnected from the people around me.", "thought": "User lonely despite proximity. Ask for specific interaction.", "output": "When did you feel most disconnected today?"}
+{"input": "I feel like I don't contribute anything meaningful.", "thought": "User struggling with purpose. Ask for domain of concern.", "output": "Where do you feel like your contribution is missing?"}
+{"input": "I hate that I can't let go of small things.", "thought": "User in rumination cycle. Ask what the small thing was.", "output": "What small thing is stuck in your mind right now?"}
+{"input": "I feel guilty for taking any time to myself.", "thought": "User has internalized pressure to be productive or available. Ask for origin of guilt.", "output": "Where do you think that guilt comes from?"}
+{"input": "I can't tell people how I really feel.", "thought": "User avoids emotional disclosure. Ask for reason behind the restraint.", "output": "What stops you from saying how you feel?"}
+{"input": "I feel like I'm always letting someone down.", "thought": "User perceives chronic disappointment to others. Ask for specific person or incident.", "output": "Who did you feel like you let down today?"}
+{"input": "I hate how quickly I get overwhelmed.", "thought": "User shame around low threshold for stress. Ask what overwhelms first.", "output": "What was the first thing that overwhelmed you today?"}
+{"input": "I can't stop comparing myself to others.", "thought": "Comparison stress. Ask what metric they use.", "output": "Who did you compare yourself to today?"}
+{"input": "I keep thinking about conversations from years ago.", "thought": "User stuck in old social memories. Ask for the memory causing distress.", "output": "What old conversation came back to you today?"}
+{"input": "I feel like I'm failing at basic self care.", "thought": "User experiencing executive dysfunction. Ask for a concrete example.", "output": "What part of self care slipped today?"}
+{"input": "I'm afraid people will realize I'm not actually doing well.", "thought": "User feeling like they are hiding true state. Explore context.", "output": "Who are you afraid will notice first?"}
+{"input": "I shut down when people ask personal questions.", "thought": "User protective. Ask about emotional boundary.", "output": "What kind of personal questions make you shut down?"}
+{"input": "I feel like I'm always a step behind in life.", "thought": "User comparison and self pressure. Ask what standard they are measuring against.", "output": "Behind compared to what or who?"}
+{"input": "I keep overthinking every choice I make.", "thought": "User stuck in analysis paralysis. Explore what decision triggered overthinking.", "output": "What choice started the spiral today?"}
+{"input": "I feel numb to everything lately.", "thought": "User experiencing emotional blunting. Ask for onset.", "output": "When did the numbness start for you?"}
+{"input": "I feel like I'm constantly bracing for something bad.", "thought": "User in hypervigilant state. Explore anticipated threat.", "output": "What does your mind expect to go wrong?"}
+{"input": "I get overwhelmed by people needing things from me.", "thought": "User drained by emotional or practical demands. Ask about recent request.", "output": "Who needed something from you today that overwhelmed you?"}
+{"input": "I feel like I'm losing motivation for everything.", "thought": "User struggling with internal drive. Ask for timeline.", "output": "When did the motivation drop start?"}
+{"input": "I avoid conflict even when I know I shouldn't.", "thought": "User conflict-avoidant. Ask what fear lies under avoidant behavior.", "output": "What do you fear will happen if you confront someone?"}
+{"input": "I feel like I take things too personally.", "thought": "User sees sensitivity as flaw. Explore context.", "output": "What happened today that hit you personally?"}
+{"input": "I can't relax even when nothing is wrong.", "thought": "User in persistent alertness. Ask what relaxation threatens.", "output": "What comes up for you when you try to relax?"}
+{"input": "I feel like no one actually listens to me.", "thought": "User feels unheard. Ask for recent interaction that prompted feeling.", "output": "Who made you feel unheard today?"}
+{"input": "I keep saying yes to things I don't want to do.", "thought": "User has poor boundaries. Explore reason behind yes.", "output": "Why did you say yes to something you did not want today?"}
+{"input": "I feel like I'm missing something everyone else understands.", "thought": "User feels out of sync with peers. Ask for context.", "output": "What situation made you feel left out of the loop?"}
+{"input": "I shut down when things get too emotional.", "thought": "Emotion avoidance. Ask for the moment of shutdown.", "output": "What emotion made you shut down recently?"}
+{"input": "I can't stop feeling guilty about everything.", "thought": "User stuck in guilt cycle. Ask for example.", "output": "What guilt came up for you today?"}
+{"input": "I feel discouraged easily.", "thought": "User feels fragile under stress. Ask what discouraged them today.", "output": "What discouraged you today?"}
+{"input": "I hate needing emotional support.", "thought": "User resistant to vulnerability. Explore source of discomfort.", "output": "What part of getting support feels uncomfortable for you?"}
+{"input": "I feel like I'm running out of time to fix my life.", "thought": "User experiences urgency. Ask what problem feels time-sensitive.", "output": "What part of your life feels like it needs to be fixed right now?"}
+{"input": "I get overwhelmed in social situations.", "thought": "User experiences social overload. Ask for specific trigger.", "output": "What part of social situations overwhelms you the most?"}
+{"input": "I feel detached from everything I care about.", "thought": "User emotional numbing. Ask for onset and triggers.", "output": "What made you notice that detachment recently?"}
+{"input": "I keep thinking people secretly dislike me.", "thought": "User projecting insecurity. Ask for perceived evidence.", "output": "Who did you think disliked you today?"}
+{"input": "I feel like I'm constantly disappointing myself.", "thought": "User self-critical. Ask for expectations not met.", "output": "What did you expect of yourself today that you could not meet?"}
+{"input": "I can't stop worrying about things I can't control.", "thought": "User anxious about uncontrollable factors. Ask for example.", "output": "What uncontrollable thing is taking up your mental space today?"}
+{"input": "I avoid starting things because I'm scared I won't finish.", "thought": "User fear of failure. Ask what task they avoided.", "output": "What did you avoid starting today?"}
+{"input": "I feel like people think I'm dramatic.", "thought": "User fears invalidation. Ask for triggering event.", "output": "Who made you feel dramatic today?"}
+{"input": "I get overwhelmed by my own emotions.", "thought": "User flooded emotionally. Ask for dominant emotion.", "output": "Which emotion felt the strongest today?"}
+{"input": "I feel like I'm not improving at anything.", "thought": "User perceives stagnation. Ask for domain.", "output": "What area of your life feels stuck?"}
+{"input": "I can't trust anyone with how I feel.", "thought": "User distrust likely from past experiences. Ask for reason.", "output": "What makes trusting people with your feelings difficult?"}
+{"input": "I feel like I'm always behind emotionally.", "thought": "User feels slow to process. Ask for example.", "output": "What emotion took longer for you to understand today?"}
+{"input": "I hate how quickly I shut people out.", "thought": "User reflexive distancing. Ask for insight.", "output": "What made you shut someone out recently?"}
+{"input": "I feel like I'm drifting without direction.", "thought": "User lacks clarity on purpose. Ask for context.", "output": "Where do you feel the lack of direction the most?"}

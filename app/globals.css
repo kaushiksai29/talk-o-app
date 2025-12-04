@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@theme {
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-dm-sans);
+}
+
+/* Remove conflicting body styles to let utility classes take over */
