@@ -2,35 +2,35 @@
     "rewrites": [
         {
             "source": "/api/chat",
-            "destination": "/api/index.py"
+            "destination": "/api/py"
         },
         {
             "source": "/api/users",
-            "destination": "/api/index.py"
+            "destination": "/api/py"
         },
         {
             "source": "/api/history/:path*",
-            "destination": "/api/index.py"
+            "destination": "/api/py"
         },
         {
             "source": "/api/register",
-            "destination": "/api/index.py"
+            "destination": "/api/py"
         },
         {
             "source": "/api/login",
-            "destination": "/api/index.py"
+            "destination": "/api/py"
         },
         {
             "source": "/api/health",
-            "destination": "/api/index.py"
+            "destination": "/api/py"
         },
         {
             "source": "/api/docs",
-            "destination": "/api/index.py"
+            "destination": "/api/py"
         },
         {
             "source": "/api/openapi.json",
-            "destination": "/api/index.py"
+            "destination": "/api/py"
         }
     ]
 }
