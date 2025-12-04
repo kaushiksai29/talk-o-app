@@ -9,7 +9,11 @@ from datetime import datetime
 from backend.supabase_client import supabase
 from backend.rag.rag_pipeline import generate_response
 
-app = FastAPI(title="ADHD Support Companion API")
+app = FastAPI(title="ADHD Support Companion API", root_path="/api")
+
+@app.get("/")
+async def root():
+    return {"status": "ok", "message": "Talk-o API is running"}
 
 app.add_middleware(
     CORSMiddleware,
