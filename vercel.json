@@ -1,10 +1,14 @@
 {
-    "functions": {
-        "api/index.py": {
-            "maxDuration": 30,
-            "runtime": "python3.11"
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/next"
+        },
+        {
+            "src": "api/index.py",
+            "use": "@vercel/python"
         }
-    },
+    ],
     "rewrites": [
         {
             "source": "/api/((?!auth).*)",
