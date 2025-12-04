@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+// Force git update - removing AppleProvider
 import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
