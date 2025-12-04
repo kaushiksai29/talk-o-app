@@ -1,16 +1,8 @@
 {
     "rewrites": [
         {
-            "source": "/api/:path*",
-            "destination": "/api/:path*"
-        },
-        {
-            "source": "/docs",
-            "destination": "/api/docs"
-        },
-        {
-            "source": "/openapi.json",
-            "destination": "/api/openapi.json"
+            "source": "/api/(.*)",
+            "destination": "/api/index.py"
         }
     ]
 }
