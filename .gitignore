@@ -51,3 +51,6 @@ venv/
 **/chroma_data/
 *.sqlite3
 
+git add backend/main.py
+git commit -m "Add backend main.py"
+git push origin fresh-deploy

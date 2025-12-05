@@ -221,7 +221,7 @@ export default function LandingPage() {
 
           {/* Option A: Abstract Flowing Gradient Background - Dark Mode Brightened */}
           <div className="absolute inset-0 -z-10 bg-hero-gradient dark:bg-hero-gradient-dark bg-[length:200%_200%] animate-gradient-shift dark:opacity-100"></div>
-          <div className="absolute inset-0 -z-20 bg-cream-50 dark:bg-[#020617]"></div>
+          <div className="absolute inset-0 -z-20 bg-cream-50 dark:bg-[#0f0e2a]"></div>
 
           {/* Floating Orbs (Subtle) */}
           <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-purple-400/10 rounded-full blur-[100px] animate-gentle-float"></div>
@@ -238,13 +238,13 @@ export default function LandingPage() {
               transform: `translateY(0) scale(${heroScale})`
             }}
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-coffee-dark dark:text-cream-50 leading-[1.1] tracking-tight mb-8 font-serif drop-shadow-sm">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-coffee-dark dark:text-white leading-[1.1] tracking-tight mb-8 font-serif drop-shadow-sm">
               Silence the chaos. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-stargirl-primary to-sage-primary">
                 Find your flow.
               </span>
             </h1>
-            <p className="text-xl md:text-3xl font-light text-coffee-light dark:text-cream-200 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-3xl font-light text-coffee-light dark:text-cream-100 max-w-3xl mx-auto leading-relaxed">
               An ADHD companion that meets you exactly where you are.
             </p>
 
