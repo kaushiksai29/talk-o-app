@@ -5,9 +5,8 @@ from typing import Optional, List
 import uvicorn
 import uuid
 from datetime import datetime
-
-from backend.supabase_client import supabase
-from backend.rag.rag_pipeline import generate_response
+from supabase_client import supabase
+from rag.rag_pipeline import generate_response
 
 app = FastAPI(title="ADHD Support Companion API", root_path="/api")
 
