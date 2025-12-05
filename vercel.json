@@ -4,5 +4,6 @@
             "source": "/api/((?!auth).*)",
             "destination": "/api/index.py"
         }
-    ]
+    ],
+    "framework": "nextjs"
 }
