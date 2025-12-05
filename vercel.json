@@ -1,0 +1,30 @@
+<<<<<<< HEAD
+=======
+{
+    "framework": "nextjs",
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/next"
+        },
+        {
+            "src": "api/index.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/api/:path*",
+            "destination": "/api/:path*"
+        },
+        {
+            "source": "/docs",
+            "destination": "/api/docs"
+        },
+        {
+            "source": "/openapi.json",
+            "destination": "/api/openapi.json"
+        }
+    ]
+}
+>>>>>>> 2437f0224451b8ea82eb15e2856ac5de02f04aa8

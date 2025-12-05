@@ -1,53 +1,5 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-
-export const authOptions = {
-    providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID || "",
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-        }),
-    ],
-    pages: {
-        signIn: '/login',
-    },
-    callbacks: {
-        async jwt({ token, account }: { token: any, account: any }) {
-            if (account) {
-                token.provider = account.provider;
-            }
-            return token;
-        },
-        async session({ session, token }: { session: any, token: any }) {
-            // Send user to backend to ensure they exist in our DB
-            try {
-                if (session?.user?.email) {
-                    let provider = token.provider || "credentials";
-                    if (provider === "azure-ad") provider = "microsoft";
-
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/users`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            email: session.user.email,
-                            name: session.user.name || "User",
-                            provider: provider,
-                            image: session.user.image
-                        })
-                    });
-
-                    if (res.ok) {
-                        const userData = await res.json();
-                        session.user.id = userData.id;
-                    }
-                }
-            } catch (e) {
-                console.error("Failed to sync user with backend", e);
-            }
-            return session;
-        }
-    }
-};
+import { authOptions } from "./options";
 
 const handler = NextAuth(authOptions);
 

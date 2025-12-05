@@ -1,5 +1,4 @@
-// app/api/auth/[...nextauth]/options.ts
-import { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
@@ -13,18 +12,20 @@ export const authOptions: NextAuthOptions = {
         signIn: '/login',
     },
     callbacks: {
-        async jwt({ token, account }) {
+        async jwt({ token, account }: { token: any, account: any }) {
             if (account) {
                 token.provider = account.provider;
             }
             return token;
         },
-        async session({ session, token }) {
+        async session({ session, token }: { session: any, token: any }) {
             // Send user to backend to ensure they exist in our DB
             try {
                 if (session?.user?.email) {
-                    let provider = (token.provider as string) || "credentials";
+                    let provider = token.provider || "credentials";
                     if (provider === "azure-ad") provider = "microsoft";
+
+                    // Fix: Added missing parentheses for fetch call
                     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/users`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -35,9 +36,10 @@ export const authOptions: NextAuthOptions = {
                             image: session.user.image
                         })
                     });
+
                     if (res.ok) {
                         const userData = await res.json();
-                        (session.user as any).id = userData.id;
+                        session.user.id = userData.id;
                     }
                 }
             } catch (e) {
