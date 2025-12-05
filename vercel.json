@@ -1,4 +1,5 @@
 {
+    "framework": "nextjs",
     "builds": [
         {
             "src": "package.json",
@@ -11,8 +12,16 @@
     ],
     "rewrites": [
         {
-            "source": "/api/((?!auth).*)",
-            "destination": "/api/index.py"
+            "source": "/api/:path*",
+            "destination": "/api/:path*"
+        },
+        {
+            "source": "/docs",
+            "destination": "/api/docs"
+        },
+        {
+            "source": "/openapi.json",
+            "destination": "/api/openapi.json"
         }
     ]
 }
