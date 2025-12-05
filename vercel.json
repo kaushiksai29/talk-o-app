@@ -1,9 +1,18 @@
 {
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/next"
+        },
+        {
+            "src": "api/index.py",
+            "use": "@vercel/python"
+        }
+    ],
     "rewrites": [
         {
             "source": "/api/((?!auth).*)",
             "destination": "/api/index.py"
         }
-    ],
-    "framework": "nextjs"
+    ]
 }
