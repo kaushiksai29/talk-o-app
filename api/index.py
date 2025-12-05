@@ -5,4 +5,7 @@ import sys
 # api/index.py -> api -> root
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from backend.main import app
+try:
+    from backend.main import app
+except ImportError:
+    from main import app

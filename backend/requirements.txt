@@ -12,3 +12,9 @@ pymongo
 motor
 pytest
 httpx
+supabase
+python-dotenv
+voyageai
+anthropic
+groq
+openai
