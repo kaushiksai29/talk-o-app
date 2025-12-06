@@ -19,16 +19,25 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-if not SUPABASE_URL or not SUPABASE_KEY or not VOYAGE_API_KEY or not ANTHROPIC_API_KEY:
-    print("CRITICAL WARNING: Missing API keys for RAG pipeline!")
+if not SUPABASE_URL or not SUPABASE_KEY:
+    print("WARNING: SUPABASE credentials missing for RAG pipeline.")
+
+if not VOYAGE_API_KEY:
+    print("WARNING: VOYAGE_API_KEY missing. RAG retrieval disabled.")
+
+if not ANTHROPIC_API_KEY:
+    print("WARNING: ANTHROPIC_API_KEY missing. Claude fallback disabled.")
 
 if not GROQ_API_KEY:
-    print("WARNING: GROQ_API_KEY missing. Stargirl will fallback to Haiku.")
+    print("WARNING: GROQ_API_KEY missing. Sage will fallback to Claude Haiku.")
 
-# Initialize Clients
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-vo = voyageai.Client(api_key=VOYAGE_API_KEY)
-claude = Anthropic(api_key=ANTHROPIC_API_KEY)
+if not OPENAI_API_KEY:
+    print("WARNING: OPENAI_API_KEY missing. Stargirl will fail.")
+
+# Initialize Clients - Only if keys exist
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
+vo = voyageai.Client(api_key=VOYAGE_API_KEY) if VOYAGE_API_KEY else None
+claude = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
 groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 openai_client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
 
@@ -115,7 +124,7 @@ You're just there. That's it."""
             print(f"Calling GPT-4o-mini for {persona}...")
             if not openai_client:
                 raise Exception("OPENAI_API_KEY not set")
-                
+
             response = openai_client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=messages,
@@ -126,8 +135,8 @@ You're just there. That's it."""
             used_model = "gpt-4o-mini"
             print("GPT-4o-mini response received.")
         except Exception as e:
-            print(f"GPT-4o-mini failed: {e}")
-            answer = "I'm sorry, I'm having trouble speaking right now."
+            print(f"GPT-4o-mini failed: {e}. Will try fallback.")
+            # Leave answer empty so fallback can trigger
 
 
     # 2. Sage -> Groq (Llama 3.3 70B)
@@ -149,9 +158,12 @@ You're just there. That's it."""
             print(f"Groq failed: {e}. Falling back to Claude.")
             # Fallback logic could go here if needed
             
-    # Fallback if no answer yet (e.g. Sage failed Groq)
+    # Fallback if no answer yet (e.g. Sage failed Groq or Stargirl failed OpenAI)
     if not answer:
          try:
+            if not claude:
+                raise Exception("ANTHROPIC_API_KEY not set - no fallback available")
+
             print(f"Calling Claude 3.5 Haiku (Fallback)...")
             # Claude expects a different format, but for simplicity let's try to adapt
             # or just use the simple format for fallback
@@ -159,7 +171,7 @@ You're just there. That's it."""
             for msg in history[-5:]:
                  role = "user" if msg.get("sender") == "user" else "assistant"
                  claude_messages.append({"role": role, "content": msg.get("message", "")})
-            
+
             claude_messages.append({"role": "user", "content": f"CONTEXT:\n{retrieved_context}\n\nUSER:\n{query}"})
 
             message = claude.messages.create(
@@ -173,7 +185,7 @@ You're just there. That's it."""
             used_model = "claude-3-5-haiku-latest (fallback)"
          except Exception as e:
             print(f"Fallback failed: {e}")
-            answer = "I'm having trouble connecting right now."
+            answer = "I'm having trouble connecting right now. Please check that API keys are configured."
 
     return {
         "answer": answer,

@@ -4,25 +4,41 @@ from pydantic import BaseModel
 from typing import Optional, List
 import uvicorn
 import uuid
+import os
 from datetime import datetime
+from supabase_client import supabase
+from rag.rag_pipeline import generate_response
 
-from backend.supabase_client import supabase
-from backend.rag.rag_pipeline import generate_response
-
-app = FastAPI(title="ADHD Support Companion API", root_path="/api")
+app = FastAPI(title="ADHD Support Companion API")
 
 @app.get("/")
 async def root():
     return {"status": "ok", "message": "Talk-o API is running"}
 
+# Dynamic CORS - get allowed origins from environment or use defaults
+allowed_origins = [
+    "http://localhost:3000",
+    "https://talk-o.app",
+    "https://talk-o-app.vercel.app"
+]
+
+# Add Railway domain if specified
+railway_domain = os.getenv("RAILWAY_PUBLIC_DOMAIN")
+if railway_domain:
+    allowed_origins.append(f"https://{railway_domain}")
+
+# Add custom frontend URL if specified
+frontend_url = os.getenv("FRONTEND_URL")
+if frontend_url:
+    allowed_origins.append(frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # --- Pydantic Models ---
 class ChatRequest(BaseModel):
     message: str
@@ -235,24 +251,24 @@ async def register(
 
 @app.post("/login")
 async def login(
-    email: str = Form(...), 
-    password: str = Form(...), 
+    email: str = Form(...),
+    password: str = Form(...),
 ):
     try:
         res = supabase.auth.sign_in_with_password({
             "email": email,
             "password": password
         })
-        
+
         if res.user:
             # Fetch profile
             profile_res = supabase.table("profiles").select("*").eq("id", res.user.id).execute()
             profile = profile_res.data[0] if profile_res.data else {}
-            
+
             name = f"{profile.get('first_name', '')} {profile.get('last_name', '')}".strip()
             if not name:
                 name = res.user.user_metadata.get("first_name", "") + " " + res.user.user_metadata.get("last_name", "")
-            
+
             return {
                 "id": res.user.id,
                 "email": res.user.email,
@@ -262,10 +278,25 @@ async def login(
             }
         else:
              raise HTTPException(status_code=401, detail="Invalid credentials")
-             
+
     except Exception as e:
         print(f"Login error: {e}")
         raise HTTPException(status_code=401, detail="Invalid credentials")
+
+@app.post("/verify")
+async def verify_email(token: str = Body(..., embed=True)):
+    """
+    Verify email with token.
+    Note: Supabase handles email verification automatically via email links.
+    This endpoint is here for compatibility but may not be needed.
+    """
+    try:
+        # Supabase handles verification via the email link directly
+        # If you need custom verification logic, implement it here
+        return {"message": "Email verification is handled by Supabase auth"}
+    except Exception as e:
+        print(f"Verification error: {e}")
+        raise HTTPException(status_code=400, detail="Verification failed")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
