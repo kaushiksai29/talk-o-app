@@ -58,6 +58,9 @@ def get_or_create_user(email: str, name: str = "User", provider: str = "unknown"
     Returns the user_id (UUID).
     """
     user_id = None
+    if not supabase:
+        print("Error: Supabase client not initialized")
+        return None
     
     # 1. Check if profile exists
     try:
@@ -139,6 +142,8 @@ async def chat_endpoint(request: ChatRequest):
         history = []
         if user_id:
             try:
+                if not supabase:
+                    raise Exception("Supabase client not initialized")
                 # Fetch last 20 messages for this persona
                 hist_res = supabase.table("chat_history") \
                     .select("*") \
@@ -162,6 +167,9 @@ async def chat_endpoint(request: ChatRequest):
         # Save to history if user_id is provided
         if user_id:
             try:
+                if not supabase:
+                    raise Exception("Supabase client not initialized")
+
                 # User message
                 supabase.table("chat_history").insert({
                     "user_id": user_id,
@@ -189,6 +197,8 @@ async def chat_endpoint(request: ChatRequest):
 @app.get("/history/{user_id}")
 async def get_history(user_id: str):
     try:
+        if not supabase:
+             return []
         response = supabase.table("chat_history").select("*").eq("user_id", user_id).order("timestamp", desc=False).execute()
         return response.data
     except Exception as e:
@@ -215,6 +225,9 @@ async def register(
     last_name: str = Form(...),
 ):
     try:
+        if not supabase:
+            raise Exception("Supabase client not initialized")
+        
         # Sign up with Supabase Auth
         res = supabase.auth.sign_up({
             "email": email,
@@ -255,6 +268,9 @@ async def login(
     password: str = Form(...),
 ):
     try:
+        if not supabase:
+             raise HTTPException(status_code=503, detail="Service Unavailable: Database connection failed")
+             
         res = supabase.auth.sign_in_with_password({
             "email": email,
             "password": password
