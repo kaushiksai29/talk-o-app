@@ -17,6 +17,11 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Talk-o",
   description: "Chat with Stargirl and Sage - AI companions designed to support people with ADHD through meaningful conversations and guidance.",
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 import { Providers } from "./providers";
