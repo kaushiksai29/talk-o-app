@@ -184,7 +184,7 @@ function ChatInterface() {
             setMessages(prev => {
                 const newMessages = [...prev];
                 const lastMsg = newMessages[newMessages.length - 1];
-                lastMsg.content = "I'm having trouble connecting to my brain right now. Please try again later.";
+                lastMsg.content = `Debug Error: ${error instanceof Error ? error.message : String(error)} \nTarget: ${targetUrl}`;
                 lastMsg.isStreaming = false;
                 return newMessages;
             });
