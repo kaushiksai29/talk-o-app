@@ -88,7 +88,7 @@ function ChatInterface() {
             // Fetch History
             if (currentUserId) {
                 try {
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/history/${currentUserId}`);
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://sahkwja1.up.railway.app"}/history/${currentUserId}`);
                     if (res.ok) {
                         const history = await res.json();
                         // Filter by current persona and map to UI format
@@ -151,7 +151,8 @@ function ChatInterface() {
             // Construct guest email if using guest ID
             const effectiveUserId = user?.id || session?.user?.email || (guestId ? `guest_${guestId}@talk-o.app` : null);
 
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/chat`, {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://sahkwja1.up.railway.app";
+            const res = await fetch(`${apiUrl}/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -178,6 +179,8 @@ function ChatInterface() {
 
         } catch (error) {
             console.error("Chat error:", error);
+            const targetUrl = process.env.NEXT_PUBLIC_API_URL || "https://sahkwja1.up.railway.app";
+            console.error(`Attempted to reach: ${targetUrl}`);
             setMessages(prev => {
                 const newMessages = [...prev];
                 const lastMsg = newMessages[newMessages.length - 1];

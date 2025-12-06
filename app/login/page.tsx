@@ -55,7 +55,7 @@ function LoginContent() {
                 formData.append("first_name", firstName);
                 formData.append("last_name", lastName);
 
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/register`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://sahkwja1.up.railway.app"}/register`, {
                     method: "POST",
                     body: formData,
                 });
