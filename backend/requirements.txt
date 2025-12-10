@@ -19,3 +19,5 @@ openai==1.59.8
 # Testing (optional - can be removed for production)
 # pytest==9.0.1
 # httpx==0.28.1
+
+requests==2.32.3

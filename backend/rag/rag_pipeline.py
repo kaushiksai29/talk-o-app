@@ -118,25 +118,70 @@ You're just there. That's it."""
     else:
         messages.append({"role": "user", "content": query})
 
-    # 1. Stargirl -> GPT-4o-mini
+    # 1. Stargirl -> Modal (Mistral 7B) or Fallback to GPT-4o-mini
     if persona == "stargirl":
-        try:
-            print(f"Calling GPT-4o-mini for {persona}...")
-            if not openai_client:
-                raise Exception("OPENAI_API_KEY not set")
+        # Check for Modal URL
+        modal_url = os.getenv("MODAL_API_URL")
+        
+        if modal_url:
+            try:
+                print(f"Calling Modal (Mistral 7B) for {persona}...")
+                import requests
+                
+                # Format prompt for Mistral (Simple User/Assistant or [INST])
+                # We'll use a robust chat format
+                full_prompt = f"<s>[INST] {system_prompt}\n\n"
+                for msg in history[-10:]:
+                    role = msg.get("sender", "user")
+                    content = msg.get("message", "")
+                    if role == "user":
+                        full_prompt += f"User: {content}\n"
+                    else:
+                        full_prompt += f"Stargirl: {content}\n"
+                
+                full_prompt += f"User: {query}\n[/INST]\nStargirl:"
 
-            response = openai_client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=messages,
-                max_tokens=150,
-                temperature=0.8
-            )
-            answer = response.choices[0].message.content
-            used_model = "gpt-4o-mini"
-            print("GPT-4o-mini response received.")
-        except Exception as e:
-            print(f"GPT-4o-mini failed: {e}. Will try fallback.")
-            # Leave answer empty so fallback can trigger
+                payload = {
+                    "prompt": full_prompt,
+                    "max_tokens": 250,
+                    "temperature": 0.85
+                }
+                
+                response = requests.post(modal_url, json=payload, headers={"Content-Type": "application/json"}, timeout=30)
+                response.raise_for_status()
+                
+                data = response.json()
+                answer = data.get("text", "").strip()
+                
+                # Cleanup if model repeats the prompt or trailing chars
+                if "Stargirl:" in answer:
+                    answer = answer.split("Stargirl:")[-1].strip()
+                    
+                used_model = "modal-mistral-7b"
+                print("Modal response received.")
+                
+            except Exception as e:
+                print(f"Modal failed: {e}. Falling back to OpenAI.")
+                # Fallback will be handled below if answer is empty
+        
+        if not answer:
+            try:
+                print(f"Calling GPT-4o-mini for {persona} (Fallback)...")
+                if not openai_client:
+                    raise Exception("OPENAI_API_KEY not set")
+
+                response = openai_client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=messages,
+                    max_tokens=150,
+                    temperature=0.8
+                )
+                answer = response.choices[0].message.content
+                used_model = "gpt-4o-mini"
+                print("GPT-4o-mini response received.")
+            except Exception as e:
+                print(f"GPT-4o-mini failed: {e}. Will try fallback.")
+                # Leave answer empty so fallback can trigger
 
 
     # 2. Sage -> Groq (Llama 3.3 70B)
