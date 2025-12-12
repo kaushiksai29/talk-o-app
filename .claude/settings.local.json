@@ -3,7 +3,22 @@
     "allow": [
       "Bash(cat:*)",
       "Bash(python:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(pip show:*)",
+      "Bash(echo:*)",
+      "Bash(pip install:*)",
+      "Bash(together --help:*)",
+      "Bash(together --api-key 0f1ba1208bc743e4c7ab7281d624f574eb3f1daf9baf6c7050447177786cf108 files upload --type adapter --base-model \"mistralai/Mistral-7B-Instruct-v0.3\" --hf-repo-id \"kash-on-the-dash/stargirl-mistral-7b\")",
+      "Bash(together files upload --help:*)",
+      "Bash(together --api-key:*)",
+      "Bash(together models --help:*)",
+      "Bash(dir:*)",
+      "WebSearch",
+      "WebFetch(domain:docs.together.ai)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:862j4mcp.up.railway.app)"
     ],
     "deny": [],
     "ask": []

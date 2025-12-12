@@ -327,19 +327,22 @@ export default function LandingPage() {
         <h2 className="text-4xl md:text-6xl font-serif text-center mb-16 text-coffee-dark dark:text-cream-50">Choose your companion</h2>
 
         {/* Desktop Accordion (Centered Icons Default) */}
-        <div className="hidden lg:flex justify-center items-center gap-6 min-h-[480px] transition-all duration-700 w-full px-[60px]">
+        <div
+          className="hidden lg:flex justify-center items-center gap-6 min-h-[550px] transition-all duration-700 w-full px-[40px]"
+          onClick={() => { setLockedPersona(null); setHoveredPersona(null); }}
+        >
 
           {/* Stargirl Panel */}
           <div
-            className={`relative overflow-hidden cursor-pointer transition-all duration-[2000ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] shadow-2xl shadow-stargirl-primary/20 group ${activePersona === 'stargirl'
-              ? 'w-[90%] h-[480px] flex-grow rounded-[2.5rem]'
+            className={`relative cursor-pointer transition-all duration-[2000ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] shadow-2xl shadow-stargirl-primary/20 group ${activePersona === 'stargirl'
+              ? 'w-[90%] h-[550px] flex-grow rounded-[2.5rem] overflow-auto'
               : activePersona === 'sage'
-                ? 'w-[140px] h-[140px] flex-shrink-0 opacity-50 hover:opacity-100 rounded-[2.5rem]'
-                : 'w-[140px] h-[140px] rounded-[2.5rem]'
+                ? 'w-[140px] h-[140px] flex-shrink-0 opacity-50 hover:opacity-100 rounded-[2.5rem] overflow-hidden'
+                : 'w-[140px] h-[140px] rounded-[2.5rem] overflow-hidden'
               }`}
             onMouseEnter={() => handleDesktopEnter('stargirl')}
             onMouseLeave={handleDesktopLeave}
-            onClick={() => handleDesktopClick('stargirl')}
+            onClick={(e) => { e.stopPropagation(); handleDesktopClick('stargirl'); }}
           >
             {/* Background Layers */}
             <div className="absolute inset-0 bg-stargirl-gradient animate-gradient-shift"></div>
@@ -416,15 +419,15 @@ export default function LandingPage() {
 
           {/* Sage Panel */}
           <div
-            className={`relative overflow-hidden cursor-pointer transition-all duration-[2000ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] shadow-2xl shadow-sage-primary/20 group ${activePersona === 'sage'
-              ? 'w-[90%] h-[480px] flex-grow rounded-[2.5rem]'
+            className={`relative cursor-pointer transition-all duration-[2000ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] shadow-2xl shadow-sage-primary/20 group ${activePersona === 'sage'
+              ? 'w-[90%] h-[550px] flex-grow rounded-[2.5rem] overflow-auto'
               : activePersona === 'stargirl'
-                ? 'w-[140px] h-[140px] flex-shrink-0 opacity-50 hover:opacity-100 rounded-[2.5rem]'
-                : 'w-[140px] h-[140px] rounded-[2.5rem]'
+                ? 'w-[140px] h-[140px] flex-shrink-0 opacity-50 hover:opacity-100 rounded-[2.5rem] overflow-hidden'
+                : 'w-[140px] h-[140px] rounded-[2.5rem] overflow-hidden'
               }`}
             onMouseEnter={() => handleDesktopEnter('sage')}
             onMouseLeave={handleDesktopLeave}
-            onClick={() => handleDesktopClick('sage')}
+            onClick={(e) => { e.stopPropagation(); handleDesktopClick('sage'); }}
           >
             {/* Background Layers */}
             <div className="absolute inset-0 bg-sage-gradient animate-gradient-shift"></div>
