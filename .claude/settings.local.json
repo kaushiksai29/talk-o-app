@@ -18,7 +18,7 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "WebFetch(domain:862j4mcp.up.railway.app)"
+      "WebFetch(domain:talk-o-app-production.up.railway.app)"
     ],
     "deny": [],
     "ask": []

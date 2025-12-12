@@ -9,31 +9,31 @@
     "rewrites": [
         {
             "source": "/api/chat",
-            "destination": "https://862j4mcp.up.railway.app/chat"
+            "destination": "https://talk-o-app-production.up.railway.app/chat"
         },
         {
             "source": "/api/history/:path*",
-            "destination": "https://862j4mcp.up.railway.app/history/:path*"
+            "destination": "https://talk-o-app-production.up.railway.app/history/:path*"
         },
         {
             "source": "/api/users",
-            "destination": "https://862j4mcp.up.railway.app/users"
+            "destination": "https://talk-o-app-production.up.railway.app/users"
         },
         {
             "source": "/api/register",
-            "destination": "https://862j4mcp.up.railway.app/register"
+            "destination": "https://talk-o-app-production.up.railway.app/register"
         },
         {
             "source": "/api/login",
-            "destination": "https://862j4mcp.up.railway.app/login"
+            "destination": "https://talk-o-app-production.up.railway.app/login"
         },
         {
             "source": "/api/verify",
-            "destination": "https://862j4mcp.up.railway.app/verify"
+            "destination": "https://talk-o-app-production.up.railway.app/verify"
         },
         {
             "source": "/api/health",
-            "destination": "https://862j4mcp.up.railway.app/health"
+            "destination": "https://talk-o-app-production.up.railway.app/health"
         }
     ]
 }

@@ -88,7 +88,7 @@ function ChatInterface() {
             // Fetch History
             if (currentUserId) {
                 try {
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://862j4mcp.up.railway.app"}/history/${currentUserId}`);
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app"}/history/${currentUserId}`);
                     if (res.ok) {
                         const history = await res.json();
                         // Filter by current persona and map to UI format
@@ -151,7 +151,7 @@ function ChatInterface() {
             // Construct guest email if using guest ID
             const effectiveUserId = user?.id || session?.user?.email || (guestId ? `guest_${guestId}@talk-o.app` : null);
 
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://862j4mcp.up.railway.app";
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app";
             const res = await fetch(`${apiUrl}/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -179,7 +179,7 @@ function ChatInterface() {
 
         } catch (error) {
             console.error("Chat error:", error);
-            const targetUrl = process.env.NEXT_PUBLIC_API_URL || "https://862j4mcp.up.railway.app";
+            const targetUrl = process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app";
             console.error(`Attempted to reach: ${targetUrl}`);
             setMessages(prev => {
                 const newMessages = [...prev];
