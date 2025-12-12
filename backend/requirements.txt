@@ -15,6 +15,7 @@ voyageai==0.3.2
 anthropic==0.45.0
 groq==0.15.0
 openai==1.59.8
+together>=1.0.0
 
 # Testing (optional - can be removed for production)
 # pytest==9.0.1
