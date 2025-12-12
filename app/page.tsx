@@ -517,7 +517,7 @@ export default function LandingPage() {
               }`}
             onClick={() => toggleMobilePersona('stargirl')}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-stargirl-light to-stargirl-dark"></div>
+            <div className="absolute inset-0 bg-stargirl-gradient animate-gradient-shift"></div>
             <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(white 2px, transparent 2px)', backgroundSize: '40px 40px' }}></div>
 
             <div className="relative p-8 text-white">
@@ -551,7 +551,7 @@ export default function LandingPage() {
               }`}
             onClick={() => toggleMobilePersona('sage')}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-sage-light to-sage-secondary"></div>
+            <div className="absolute inset-0 bg-sage-gradient animate-gradient-shift"></div>
             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(255,255,255,0.5) 1.5px, transparent 1.5px)', backgroundSize: '35px 35px' }}></div>
 
             <div className="relative p-8 text-coffee-dark">
