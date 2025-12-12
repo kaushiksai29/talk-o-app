@@ -1,6 +1,6 @@
 """
 Root main.py for Railway deployment.
-This file sets up the Python path and imports the FastAPI app from backend.
+Runs the FastAPI backend with proper path setup.
 """
 import os
 import sys
@@ -15,5 +15,9 @@ os.chdir(backend_dir)
 # Now import the app from backend/main.py
 from main import app
 
-# Re-export app for uvicorn
-__all__ = ["app"]
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8080))
+    print(f"Starting server on port {port}")
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
+
