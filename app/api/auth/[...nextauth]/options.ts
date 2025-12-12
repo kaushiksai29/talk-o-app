@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
                     if (provider === "azure-ad") provider = "microsoft";
 
                     // Fix: Added missing parentheses for fetch call
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://talk-o-app-production.up.railway.app'}/users`, {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://862j4mcp.up.railway.app'}/users`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({

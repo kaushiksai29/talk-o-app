@@ -55,7 +55,7 @@ function LoginContent() {
                 formData.append("first_name", firstName);
                 formData.append("last_name", lastName);
 
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app"}/register`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://862j4mcp.up.railway.app"}/register`, {
                     method: "POST",
                     body: formData,
                 });

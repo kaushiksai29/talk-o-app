@@ -3,7 +3,8 @@ import os
 import modal
 
 # --- CONFIGURATION ---
-# UPDATED: Using Transformers + PEFT (vLLM Removed)
+# NEW FILE: modal_deploy_v2.py
+# Using Transformers + PEFT (No vLLM)
 MODEL_ID = "kash-on-the-dash/stargirl-mistral-7b"
 ADAPTER_DIR = "/model/adapter"
 BASE_MODEL_DIR = "/model/base"
@@ -101,7 +102,6 @@ class StargirlModel:
         if not prompt:
             return {"error": "Prompt is required"}
             
-        # Optional: Add system prompt behavior if needed, but keeping it raw for now
         inputs = self.tokenizer(prompt, return_tensors="pt").to("cuda")
         
         with torch.no_grad():
@@ -114,19 +114,15 @@ class StargirlModel:
             )
             
         generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        # Remove input prompt from output if desired, but user might expect continuation
-        # Common pattern is to return full text or just new text. 
-        # vLLM returns just new text usually? No, vLLM prompt logprobs logic is complex.
-        # But standard generate returns full text. 
-        # Let's try to strip prompt if possible for cleaner API, or just return full.
-        # Check if vLLM output included prompt. Usually vLLM RequestOutput has .text which is ONLY generated text.
-        # So I should strip the prompt.
         
+        # Strip prompt to perform like vLLM text generation
         prompt_len = len(self.tokenizer.decode(inputs.input_ids[0], skip_special_tokens=True))
-        # This is rough prompt stripping
         new_text = generated_text[len(prompt):] 
-        # Actually safer to strip by token count
-        new_tokens = outputs[0][inputs.input_ids.shape[1]:]
-        new_text = self.tokenizer.decode(new_tokens, skip_special_tokens=True)
-        
+        # Safer stripping by token count or just string matching if exact
+        if generated_text.startswith(prompt):
+             new_text = generated_text[len(prompt):]
+        else:
+             # Fallback if whitespace diffs
+             new_text = generated_text
+
         return {"text": new_text}

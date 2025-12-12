@@ -4,24 +4,36 @@
         {
             "src": "package.json",
             "use": "@vercel/next"
-        },
-        {
-            "src": "api/index.py",
-            "use": "@vercel/python"
         }
     ],
     "rewrites": [
         {
-            "source": "/api/:path*",
-            "destination": "/api/:path*"
+            "source": "/api/chat",
+            "destination": "https://862j4mcp.up.railway.app/chat"
         },
         {
-            "source": "/docs",
-            "destination": "/api/docs"
+            "source": "/api/history/:path*",
+            "destination": "https://862j4mcp.up.railway.app/history/:path*"
         },
         {
-            "source": "/openapi.json",
-            "destination": "/api/openapi.json"
+            "source": "/api/users",
+            "destination": "https://862j4mcp.up.railway.app/users"
+        },
+        {
+            "source": "/api/register",
+            "destination": "https://862j4mcp.up.railway.app/register"
+        },
+        {
+            "source": "/api/login",
+            "destination": "https://862j4mcp.up.railway.app/login"
+        },
+        {
+            "source": "/api/verify",
+            "destination": "https://862j4mcp.up.railway.app/verify"
+        },
+        {
+            "source": "/api/health",
+            "destination": "https://862j4mcp.up.railway.app/health"
         }
     ]
 }
