@@ -93,18 +93,18 @@ You're just there. That's it."""
         messages.append({"role": role, "content": msg.get("message", "")})
     messages.append({"role": "user", "content": query})
     
-    # --- Together.ai (Qwen) ---
+    # --- Together.ai (Fine-tuned Stargirl) ---
     if together_client:
         try:
             response = together_client.chat.completions.create(
-                model="Qwen/Qwen2.5-72B-Instruct-Turbo",
+                model="kaushiksai29_d9a7/stargirl-qwen25-14b",
                 messages=messages,
                 max_tokens=250,
                 temperature=0.85
             )
             results["together"] = {
                 "response": response.choices[0].message.content,
-                "model": "together-qwen-2.5-72b"
+                "model": "together-stargirl-qwen25-14b"
             }
         except Exception as e:
             results["together"] = {"error": str(e)}
@@ -204,22 +204,22 @@ You're just there. That's it."""
     else:
         messages.append({"role": "user", "content": query})
 
-    # 1. Stargirl -> Together.ai (Qwen 2.5 72B) or Fallback to Groq
+    # 1. Stargirl -> Together.ai (Fine-tuned Stargirl) or Fallback to Groq
     if persona == "stargirl":
-        # Primary: Together.ai with Qwen
+        # Primary: Together.ai with fine-tuned Stargirl model
         if together_client:
             try:
-                print(f"Calling Together.ai (Qwen 2.5 72B) for {persona}...")
+                print(f"Calling Together.ai (Stargirl fine-tuned) for {persona}...")
                 
                 response = together_client.chat.completions.create(
-                    model="Qwen/Qwen2.5-72B-Instruct-Turbo",
+                    model="kaushiksai29_d9a7/stargirl-qwen25-14b",
                     messages=messages,
                     max_tokens=250,
                     temperature=0.85,
                 )
                 answer = response.choices[0].message.content
-                used_model = "together-qwen-2.5-72b"
-                print("Together.ai (Qwen) response received.")
+                used_model = "together-stargirl-qwen25-14b"
+                print("Together.ai (Stargirl) response received.")
                 
             except Exception as e:
                 print(f"Together.ai failed: {e}. Falling back to Groq.")
