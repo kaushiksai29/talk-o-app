@@ -403,8 +403,13 @@ export default function LandingPage() {
                     <p className="text-base lg:text-lg font-light leading-relaxed mb-4 opacity-100 drop-shadow-sm">
                       Gentle support for nighttime spirals, racing thoughts, and when you need someone who truly listens.
                     </p>
-                    <div className="p-4 bg-white/15 backdrop-blur-xl rounded-xl border border-white/20 shadow-lg">
-                      <p className="text-sm lg:text-base italic font-light">"I hear you, and that sounds really tough. 🌙 Your feelings are completely valid."</p>
+                    <div className="space-y-3">
+                      <div className="p-3 bg-white/15 backdrop-blur-xl rounded-xl border border-white/20 shadow-lg">
+                        <p className="text-sm lg:text-base italic font-light">"I hear you, and that sounds really tough. 🌙 Your feelings are completely valid."</p>
+                      </div>
+                      <div className="p-3 bg-white/15 backdrop-blur-xl rounded-xl border border-white/20 shadow-lg">
+                        <p className="text-sm lg:text-base italic font-light">"Let's ground together - can you feel your feet on the floor?"</p>
+                      </div>
                     </div>
                   </div>
                   <div className="lg:flex-shrink-0">
@@ -482,8 +487,13 @@ export default function LandingPage() {
                     <p className="text-base lg:text-lg font-medium leading-relaxed mb-4 opacity-90">
                       Practical structure for task paralysis and breaking down the impossible into doable steps.
                     </p>
-                    <div className="p-4 bg-white/30 backdrop-blur-xl rounded-xl border border-white/30 shadow-lg">
-                      <p className="text-sm lg:text-base italic font-medium">"Let's make this smaller - what's ONE tiny thing you could do in the next 5 minutes?"</p>
+                    <div className="space-y-3">
+                      <div className="p-3 bg-white/30 backdrop-blur-xl rounded-xl border border-white/30 shadow-lg">
+                        <p className="text-sm lg:text-base italic font-medium">"Let's make this smaller - what's ONE tiny thing you could do in the next 5 minutes?"</p>
+                      </div>
+                      <div className="p-3 bg-white/30 backdrop-blur-xl rounded-xl border border-white/30 shadow-lg">
+                        <p className="text-sm lg:text-base italic font-medium">"What must happen today vs. what can wait? Let's prioritize together."</p>
+                      </div>
                     </div>
                   </div>
                   <div className="lg:flex-shrink-0">
