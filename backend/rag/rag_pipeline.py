@@ -47,13 +47,18 @@ openai_client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
 
 # Together.ai client
 together_client = None
+print(f"DEBUG: TOGETHER_API_KEY present: {bool(TOGETHER_API_KEY)}")
 if TOGETHER_API_KEY:
     try:
         from together import Together
         together_client = Together(api_key=TOGETHER_API_KEY)
-        print("Together.ai client initialized.")
-    except ImportError:
-        print("WARNING: 'together' package not installed. Run: pip install together")
+        print("SUCCESS: Together.ai client initialized.")
+    except ImportError as e:
+        print(f"ERROR: 'together' package not installed: {e}")
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Together client: {e}")
+else:
+    print("WARNING: TOGETHER_API_KEY not found in environment")
 
 
 def run_ab_test(query, history=[]):
@@ -206,10 +211,11 @@ You're just there. That's it."""
 
     # 1. Stargirl -> Together.ai (Fine-tuned Stargirl) or Fallback to Groq
     if persona == "stargirl":
+        print(f"DEBUG: together_client exists: {together_client is not None}")
         # Primary: Together.ai with fine-tuned Stargirl model
         if together_client:
             try:
-                print(f"Calling Together.ai (Stargirl fine-tuned) for {persona}...")
+                print(f"ATTEMPTING: Together.ai (kaushiksai29_d9a7/stargirl-qwen25-14b)...")
                 
                 response = together_client.chat.completions.create(
                     model="kaushiksai29_d9a7/stargirl-qwen25-14b",
@@ -219,10 +225,12 @@ You're just there. That's it."""
                 )
                 answer = response.choices[0].message.content
                 used_model = "together-stargirl-qwen25-14b"
-                print("Together.ai (Stargirl) response received.")
+                print("SUCCESS: Together.ai (Stargirl) response received.")
                 
             except Exception as e:
-                print(f"Together.ai failed: {e}. Falling back to Groq.")
+                print(f"FAILED: Together.ai error: {type(e).__name__}: {e}")
+        else:
+            print("SKIPPED: together_client is None, using Groq fallback")
         
         if not answer:
             try:
