@@ -382,31 +382,33 @@ export default function LandingPage() {
 
               {/* Full Content View (Expanded) */}
               <div className={`${activePersona === 'stargirl' ? 'flex' : 'hidden'} h-full flex-col opacity-0 animate-fade-up`} style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-                <div className="flex items-center gap-6 mb-8">
-                  <div className="p-5 bg-white/20 backdrop-blur-md rounded-3xl border border-white/20 shadow-lg">
-                    <StargirlIcon className="w-12 h-12" />
+                {/* Header */}
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-white/20 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg">
+                    <StargirlIcon className="w-10 h-10" />
                   </div>
                   <div>
-                    <h3 className="text-5xl font-serif mb-2 drop-shadow-md">Stargirl</h3>
-                    <p className="text-lg font-light opacity-95 drop-shadow-sm">For when thoughts won't quiet down</p>
+                    <h3 className="text-3xl lg:text-4xl font-serif mb-1 drop-shadow-md">Stargirl</h3>
+                    <p className="text-sm lg:text-base font-light opacity-95 drop-shadow-sm">For when thoughts won't quiet down</p>
                   </div>
                 </div>
 
-                <div className="max-w-2xl">
-                  <p className="text-xl font-light leading-relaxed mb-10 opacity-100 drop-shadow-sm">
-                    Gentle support for nighttime spirals, racing thoughts, and when you need someone who truly listens without judgment.
-                  </p>
-                  <div className="space-y-6 mb-12">
-                    <div className="p-6 bg-white/15 backdrop-blur-xl rounded-[2rem] border border-white/20 shadow-lg animate-bubble-in">
-                      <p className="text-lg italic font-light">"I hear you, and that sounds really tough. 🌙 Your feelings are completely valid."</p>
-                    </div>
-                    <div className="p-6 bg-white/15 backdrop-blur-xl rounded-[2rem] border border-white/20 shadow-lg animate-bubble-in" style={{ animationDelay: '0.1s' }}>
-                      <p className="text-lg italic font-light">"Let's ground together - can you feel your feet on the floor? You're safe right here."</p>
+                {/* Desktop: Horizontal layout (content left, button right) */}
+                {/* Mobile: Vertical layout (content top, button bottom) */}
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between flex-grow gap-4">
+                  <div className="lg:max-w-[65%]">
+                    <p className="text-base lg:text-lg font-light leading-relaxed mb-4 opacity-100 drop-shadow-sm">
+                      Gentle support for nighttime spirals, racing thoughts, and when you need someone who truly listens.
+                    </p>
+                    <div className="p-4 bg-white/15 backdrop-blur-xl rounded-xl border border-white/20 shadow-lg">
+                      <p className="text-sm lg:text-base italic font-light">"I hear you, and that sounds really tough. 🌙 Your feelings are completely valid."</p>
                     </div>
                   </div>
-                  <Link href="/chat?model=stargirl" className="inline-flex items-center gap-3 px-8 py-4 bg-white text-stargirl-dark rounded-full font-bold text-base hover:scale-105 transition-transform shadow-xl">
-                    Chat with Stargirl <ArrowRight className="w-5 h-5" />
-                  </Link>
+                  <div className="lg:flex-shrink-0">
+                    <Link href="/chat?model=stargirl" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-stargirl-dark rounded-full font-bold text-sm lg:text-base hover:scale-105 transition-transform shadow-xl">
+                      Chat with Stargirl <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -459,31 +461,33 @@ export default function LandingPage() {
 
               {/* Full Content View (Expanded) */}
               <div className={`${activePersona === 'sage' ? 'flex' : 'hidden'} h-full flex-col opacity-0 animate-fade-up`} style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-                <div className="flex items-center gap-6 mb-8">
-                  <div className="p-5 bg-white/40 backdrop-blur-md rounded-3xl border border-white/20 shadow-lg">
-                    <SageIcon className="w-12 h-12" />
+                {/* Header */}
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-white/40 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg">
+                    <SageIcon className="w-10 h-10" />
                   </div>
                   <div>
-                    <h3 className="text-5xl font-serif mb-2 font-medium">Sage</h3>
-                    <p className="text-lg font-medium opacity-85">For when everything feels overwhelming</p>
+                    <h3 className="text-3xl lg:text-4xl font-serif mb-1 font-medium">Sage</h3>
+                    <p className="text-sm lg:text-base font-medium opacity-85">For when everything feels overwhelming</p>
                   </div>
                 </div>
 
-                <div className="max-w-2xl">
-                  <p className="text-xl font-medium leading-relaxed mb-10 opacity-90">
-                    Practical structure for task paralysis, overwhelming to-do lists, and breaking down the impossible into doable steps.
-                  </p>
-                  <div className="space-y-6 mb-12">
-                    <div className="p-6 bg-white/30 backdrop-blur-xl rounded-[2rem] border border-white/30 shadow-lg animate-bubble-in">
-                      <p className="text-lg italic font-medium">"Let's make this smaller - what's ONE tiny thing you could do in the next 5 minutes?"</p>
-                    </div>
-                    <div className="p-6 bg-white/30 backdrop-blur-xl rounded-[2rem] border border-white/30 shadow-lg animate-bubble-in" style={{ animationDelay: '0.1s' }}>
-                      <p className="text-lg italic font-medium">"What must happen today vs. what can wait? Let's prioritize together."</p>
+                {/* Desktop: Horizontal layout (content left, button right) */}
+                {/* Mobile: Vertical layout (content top, button bottom) */}
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between flex-grow gap-4">
+                  <div className="lg:max-w-[65%]">
+                    <p className="text-base lg:text-lg font-medium leading-relaxed mb-4 opacity-90">
+                      Practical structure for task paralysis and breaking down the impossible into doable steps.
+                    </p>
+                    <div className="p-4 bg-white/30 backdrop-blur-xl rounded-xl border border-white/30 shadow-lg">
+                      <p className="text-sm lg:text-base italic font-medium">"Let's make this smaller - what's ONE tiny thing you could do in the next 5 minutes?"</p>
                     </div>
                   </div>
-                  <Link href="/chat?model=sage" className="inline-flex items-center gap-3 px-8 py-4 bg-white text-sage-dark rounded-full font-bold text-base hover:scale-105 transition-transform shadow-xl">
-                    Chat with Sage <ArrowRight className="w-5 h-5" />
-                  </Link>
+                  <div className="lg:flex-shrink-0">
+                    <Link href="/chat?model=sage" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-sage-dark rounded-full font-bold text-sm lg:text-base hover:scale-105 transition-transform shadow-xl">
+                      Chat with Sage <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
