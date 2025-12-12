@@ -7,7 +7,7 @@ import uuid
 import os
 from datetime import datetime
 from supabase_client import supabase
-from rag.rag_pipeline import generate_response
+from rag.rag_pipeline import generate_response, run_ab_test
 
 app = FastAPI(title="ADHD Support Companion API")
 
@@ -120,6 +120,24 @@ def get_or_create_user(email: str, name: str = "User", provider: str = "unknown"
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
+
+
+class ABTestRequest(BaseModel):
+    message: str
+
+
+@app.post("/chat/ab_test")
+async def ab_test_endpoint(request: ABTestRequest):
+    """
+    A/B Test endpoint: Returns responses from both Together.ai and Groq
+    for the same Stargirl prompt to enable comparison.
+    """
+    try:
+        results = run_ab_test(request.message)
+        return results
+    except Exception as e:
+        print(f"A/B Test error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):

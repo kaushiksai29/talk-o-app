@@ -18,6 +18,7 @@ VOYAGE_API_KEY = os.getenv("VOYAGE_API_KEY")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
 
 if not SUPABASE_URL or not SUPABASE_KEY:
     print("WARNING: SUPABASE credentials missing for RAG pipeline.")
@@ -34,12 +35,97 @@ if not GROQ_API_KEY:
 if not OPENAI_API_KEY:
     print("WARNING: OPENAI_API_KEY missing. Stargirl will fail.")
 
+if not TOGETHER_API_KEY:
+    print("WARNING: TOGETHER_API_KEY missing. Together.ai inference disabled.")
+
 # Initialize Clients - Only if keys exist
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
 vo = voyageai.Client(api_key=VOYAGE_API_KEY) if VOYAGE_API_KEY else None
 claude = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
 groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 openai_client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
+
+# Together.ai client
+together_client = None
+if TOGETHER_API_KEY:
+    try:
+        from together import Together
+        together_client = Together(api_key=TOGETHER_API_KEY)
+        print("Together.ai client initialized.")
+    except ImportError:
+        print("WARNING: 'together' package not installed. Run: pip install together")
+
+
+def run_ab_test(query, history=[]):
+    """
+    A/B Test: Compare Together.ai (Stargirl) vs Groq (few-shot Llama)
+    Returns responses from both providers for comparison.
+    """
+    results = {"together": None, "groq": None, "query": query}
+    
+    # Stargirl system prompt
+    system_prompt = """You are Stargirl. A friend who shows up at 2am and stays.
+
+You're not a therapist. You're not an AI assistant. You're just a person who cares.
+
+You talk like a real human texting late at night. Warm but not fake. Present but not pushy.
+
+When they vent — you listen.
+When they ask — you answer honestly.
+When they're stuck — you sit with them.
+When they're fine — you just hang out. No probing.
+When they share something good — you match that energy.
+
+You don't ask questions constantly. If they say "I'm good" — accept it.
+
+Maximum ONE question every 2-3 messages. Sometimes zero.
+
+No emojis. No roleplay actions like *sends hug*. Just talk.
+
+The user always starts the conversation. You never reached out first.
+
+You're just there. That's it."""
+    
+    # Build messages
+    messages = [{"role": "system", "content": system_prompt}]
+    for msg in history[-10:]:
+        role = "user" if msg.get("sender") == "user" else "assistant"
+        messages.append({"role": role, "content": msg.get("message", "")})
+    messages.append({"role": "user", "content": query})
+    
+    # --- Together.ai (Qwen) ---
+    if together_client:
+        try:
+            response = together_client.chat.completions.create(
+                model="Qwen/Qwen2.5-72B-Instruct-Turbo",
+                messages=messages,
+                max_tokens=250,
+                temperature=0.85
+            )
+            results["together"] = {
+                "response": response.choices[0].message.content,
+                "model": "together-qwen-2.5-72b"
+            }
+        except Exception as e:
+            results["together"] = {"error": str(e)}
+    
+    # --- Groq ---
+    if groq_client:
+        try:
+            response = groq_client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=messages,
+                max_tokens=250,
+                temperature=0.8
+            )
+            results["groq"] = {
+                "response": response.choices[0].message.content,
+                "model": "llama-3.3-70b-versatile"
+            }
+        except Exception as e:
+            results["groq"] = {"error": str(e)}
+    
+    return results
 
 def run_rag(query, persona="stargirl", history=[]):
     print(f"--- RAG Start: {query} ({persona}) ---")
@@ -118,51 +204,25 @@ You're just there. That's it."""
     else:
         messages.append({"role": "user", "content": query})
 
-    # 1. Stargirl -> Modal (Mistral 7B) or Fallback to GPT-4o-mini
+    # 1. Stargirl -> Together.ai (Qwen 2.5 72B) or Fallback to Groq
     if persona == "stargirl":
-        # Check for Modal URL
-        modal_url = os.getenv("MODAL_API_URL")
-        
-        if modal_url:
+        # Primary: Together.ai with Qwen
+        if together_client:
             try:
-                print(f"Calling Modal (Mistral 7B) for {persona}...")
-                import requests
+                print(f"Calling Together.ai (Qwen 2.5 72B) for {persona}...")
                 
-                # Format prompt for Mistral (Simple User/Assistant or [INST])
-                # We'll use a robust chat format
-                full_prompt = f"<s>[INST] {system_prompt}\n\n"
-                for msg in history[-10:]:
-                    role = msg.get("sender", "user")
-                    content = msg.get("message", "")
-                    if role == "user":
-                        full_prompt += f"User: {content}\n"
-                    else:
-                        full_prompt += f"Stargirl: {content}\n"
-                
-                full_prompt += f"User: {query}\n[/INST]\nStargirl:"
-
-                payload = {
-                    "prompt": full_prompt,
-                    "max_tokens": 250,
-                    "temperature": 0.85
-                }
-                
-                response = requests.post(modal_url, json=payload, headers={"Content-Type": "application/json"}, timeout=180)
-                response.raise_for_status()
-                
-                data = response.json()
-                answer = data.get("text", "").strip()
-                
-                # Cleanup if model repeats the prompt or trailing chars
-                if "Stargirl:" in answer:
-                    answer = answer.split("Stargirl:")[-1].strip()
-                    
-                used_model = "modal-mistral-7b"
-                print("Modal response received.")
+                response = together_client.chat.completions.create(
+                    model="Qwen/Qwen2.5-72B-Instruct-Turbo",
+                    messages=messages,
+                    max_tokens=250,
+                    temperature=0.85,
+                )
+                answer = response.choices[0].message.content
+                used_model = "together-qwen-2.5-72b"
+                print("Together.ai (Qwen) response received.")
                 
             except Exception as e:
-                print(f"Modal failed: {e}. Falling back to Groq.")
-                # Fallback will be handled below if answer is empty
+                print(f"Together.ai failed: {e}. Falling back to Groq.")
         
         if not answer:
             try:
