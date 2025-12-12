@@ -327,15 +327,15 @@ export default function LandingPage() {
         <h2 className="text-4xl md:text-6xl font-serif text-center mb-16 text-coffee-dark dark:text-cream-50">Choose your companion</h2>
 
         {/* Desktop Accordion (Centered Icons Default) */}
-        <div className="hidden lg:flex justify-center items-center gap-6 min-h-[650px] transition-all duration-700 w-full px-[100px]">
+        <div className="hidden lg:flex justify-center items-center gap-6 min-h-[480px] transition-all duration-700 w-full px-[60px]">
 
           {/* Stargirl Panel */}
           <div
             className={`relative overflow-hidden cursor-pointer transition-all duration-[2000ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] shadow-2xl shadow-stargirl-primary/20 group ${activePersona === 'stargirl'
-              ? 'w-[90%] h-[650px] flex-grow rounded-[3.5rem]'
+              ? 'w-[90%] h-[480px] flex-grow rounded-[2.5rem]'
               : activePersona === 'sage'
-                ? 'w-[180px] h-[180px] flex-shrink-0 opacity-50 hover:opacity-100 rounded-[3.5rem]'
-                : 'w-[180px] h-[180px] rounded-[3.5rem]'
+                ? 'w-[140px] h-[140px] flex-shrink-0 opacity-50 hover:opacity-100 rounded-[2.5rem]'
+                : 'w-[140px] h-[140px] rounded-[2.5rem]'
               }`}
             onMouseEnter={() => handleDesktopEnter('stargirl')}
             onMouseLeave={handleDesktopLeave}
@@ -371,12 +371,12 @@ export default function LandingPage() {
             </div>
 
             {/* Content Container */}
-            <div className={`relative h-full flex flex-col justify-between text-white transition-all duration-500 ${activePersona === 'stargirl' ? 'p-12' : 'p-0 items-center justify-center'}`}>
+            <div className={`relative h-full flex flex-col justify-between text-white transition-all duration-500 ${activePersona === 'stargirl' ? 'p-8' : 'p-0 items-center justify-center'}`}>
 
               {/* Icon Only View (Collapsed/Default) */}
               <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${activePersona === 'stargirl' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-                <div className="p-4 bg-white/10 backdrop-blur-md rounded-[3.5rem] border border-white/20 group-hover:scale-110 transition-transform duration-300">
-                  <StargirlIcon className="w-20 h-20" />
+                <div className="p-3 bg-white/10 backdrop-blur-md rounded-[2.5rem] border border-white/20 group-hover:scale-110 transition-transform duration-300">
+                  <StargirlIcon className="w-14 h-14" />
                 </div>
               </div>
 
@@ -415,10 +415,10 @@ export default function LandingPage() {
           {/* Sage Panel */}
           <div
             className={`relative overflow-hidden cursor-pointer transition-all duration-[2000ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] shadow-2xl shadow-sage-primary/20 group ${activePersona === 'sage'
-              ? 'w-[90%] h-[650px] flex-grow rounded-[3.5rem]'
+              ? 'w-[90%] h-[480px] flex-grow rounded-[2.5rem]'
               : activePersona === 'stargirl'
-                ? 'w-[180px] h-[180px] flex-shrink-0 opacity-50 hover:opacity-100 rounded-[3.5rem]'
-                : 'w-[180px] h-[180px] rounded-[3.5rem]'
+                ? 'w-[140px] h-[140px] flex-shrink-0 opacity-50 hover:opacity-100 rounded-[2.5rem]'
+                : 'w-[140px] h-[140px] rounded-[2.5rem]'
               }`}
             onMouseEnter={() => handleDesktopEnter('sage')}
             onMouseLeave={handleDesktopLeave}
@@ -448,12 +448,12 @@ export default function LandingPage() {
             </div>
 
             {/* Content Container */}
-            <div className={`relative h-full flex flex-col justify-between text-coffee-dark transition-all duration-500 ${activePersona === 'sage' ? 'p-12' : 'p-0 items-center justify-center'}`}>
+            <div className={`relative h-full flex flex-col justify-between text-coffee-dark transition-all duration-500 ${activePersona === 'sage' ? 'p-8' : 'p-0 items-center justify-center'}`}>
 
               {/* Icon Only View (Collapsed/Default) */}
               <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${activePersona === 'sage' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-                <div className="p-4 bg-white/30 backdrop-blur-md rounded-[3.5rem] border border-white/20 group-hover:scale-110 transition-transform duration-300">
-                  <SageIcon className="w-20 h-20" />
+                <div className="p-3 bg-white/30 backdrop-blur-md rounded-[2.5rem] border border-white/20 group-hover:scale-110 transition-transform duration-300">
+                  <SageIcon className="w-14 h-14" />
                 </div>
               </div>
 
