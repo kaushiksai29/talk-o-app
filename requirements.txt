@@ -10,3 +10,6 @@ email-validator
 python-dotenv
 httpx
 jinja2
+together
+voyageai
+anthropic
