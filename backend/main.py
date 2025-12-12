@@ -19,7 +19,9 @@ async def root():
 allowed_origins = [
     "http://localhost:3000",
     "https://talk-o.app",
-    "https://talk-o-app.vercel.app"
+    "https://talk-o-app.vercel.app",
+    "https://talk-o.vercel.app",
+    "*"  # Allow all for debugging - make more restrictive in production
 ]
 
 # Add Railway domain if specified
@@ -34,7 +36,7 @@ if frontend_url:
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=["*"],  # Allow all origins for now
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
