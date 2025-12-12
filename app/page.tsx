@@ -248,9 +248,13 @@ export default function LandingPage() {
               An ADHD companion that meets you exactly where you are.
             </p>
 
-            <div className="mt-12 animate-bounce text-coffee-light/50 dark:text-cream-200/30">
+            <button
+              onClick={() => document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' })}
+              className="mt-12 animate-bounce text-coffee-light/50 dark:text-cream-200/30 hover:text-coffee-light dark:hover:text-cream-200 transition-colors cursor-pointer"
+              aria-label="Scroll to next section"
+            >
               <ArrowRight className="w-8 h-8 mx-auto rotate-90" />
-            </div>
+            </button>
           </div>
         </div>
       </section>
