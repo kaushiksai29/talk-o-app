@@ -682,7 +682,7 @@ export default function LandingPage() {
 
           {/* Support Button */}
           <div className="mt-10 flex justify-center">
-            <a href="https://buymeacoffee.com/kaushik" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-6 py-3 bg-cream-100 dark:bg-white/10 hover:bg-cream-200 dark:hover:bg-white/20 rounded-xl transition-colors text-coffee-dark dark:text-cream-100 font-medium">
+            <a href="https://buymeacoffee.com/kaushiksaikadali" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-6 py-3 bg-cream-100 dark:bg-white/10 hover:bg-cream-200 dark:hover:bg-white/20 rounded-xl transition-colors text-coffee-dark dark:text-cream-100 font-medium">
               <Heart className="w-5 h-5 text-red-400 fill-red-400" />
               Support this project
             </a>
