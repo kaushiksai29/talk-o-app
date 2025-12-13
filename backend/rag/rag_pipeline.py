@@ -1,5 +1,6 @@
 
 import os
+import re
 import voyageai
 from anthropic import Anthropic
 from groq import Groq
@@ -358,6 +359,17 @@ Get to the point, then stop."""
          except Exception as e:
             print(f"Fallback failed: {e}")
             answer = "I'm having trouble connecting right now. Please check that API keys are configured."
+
+    # Clean the response - strip thought tags and other internal markers
+    if answer:
+        # Remove <thought>...</thought> tags and their content
+        answer = re.sub(r'<thought>.*?</thought>', '', answer, flags=re.DOTALL | re.IGNORECASE)
+        # Remove <thinking>...</thinking> tags and their content  
+        answer = re.sub(r'<thinking>.*?</thinking>', '', answer, flags=re.DOTALL | re.IGNORECASE)
+        # Clean up any extra whitespace
+        answer = answer.strip()
+        # Remove leading newlines
+        answer = answer.lstrip('\n')
 
     return {
         "answer": answer,
