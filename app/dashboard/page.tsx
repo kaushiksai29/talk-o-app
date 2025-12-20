@@ -7,6 +7,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { StargirlIcon, SageIcon } from "@/components/PersonaIcons";
 import Sidebar from "@/components/Sidebar";
 import { createClient } from '@supabase/supabase-js';
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 // Initialize Supabase Client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -14,35 +16,48 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function Dashboard() {
+    const { data: session, status } = useSession();
+    const router = useRouter();
     const [user, setUser] = useState<{ name: string; email: string } | null>(null);
     const [loading, setLoading] = useState(true);
 
+    // Auth Guard
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/login?callbackUrl=/dashboard");
+        }
+    }, [status, router]);
+
     useEffect(() => {
         const getUser = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session?.user) {
-                // Fetch profile for name
-                const { data: profile } = await supabase
-                    .from('profiles')
-                    .select('first_name, last_name')
-                    .eq('id', session.user.id)
-                    .single();
+            if (status !== "authenticated" || !session?.user) return;
 
-                const name = profile
-                    ? `${profile.first_name} ${profile.last_name}`.trim()
-                    : session.user.email?.split('@')[0] || "User";
+            // Fetch profile for name
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('first_name, last_name')
+                .eq('id', (session.user as any).id)
+                .single();
 
-                setUser({
-                    name: name || "Friend",
-                    email: session.user.email || ""
-                });
-            }
+            const name = profile
+                ? `${profile.first_name} ${profile.last_name}`.trim()
+                : session.user.name || session.user.email?.split('@')[0] || "User";
+
+            setUser({
+                name: name || "Friend",
+                email: session.user.email || ""
+            });
             setLoading(false);
         };
-        getUser();
-    }, []);
 
-    if (loading) {
+        if (status === "authenticated") {
+            getUser();
+        } else if (status === "unauthenticated") {
+            setLoading(false);
+        }
+    }, [session, status]);
+
+    if (loading || status === "loading") {
         return <div className="min-h-screen flex items-center justify-center bg-cream-50 dark:bg-[#0f172a] text-coffee-light dark:text-cream-400">Loading...</div>;
     }
 

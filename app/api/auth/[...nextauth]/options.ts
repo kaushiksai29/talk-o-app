@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -7,32 +8,65 @@ export const authOptions: NextAuthOptions = {
             clientId: process.env.GOOGLE_CLIENT_ID || "",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
         }),
+        CredentialsProvider({
+            name: "Credentials",
+            credentials: {
+                email: { label: "Email", type: "email" },
+                password: { label: "Password", type: "password" }
+            },
+            async authorize(credentials) {
+                if (!credentials?.email || !credentials?.password) return null;
+
+                try {
+                    const formData = new FormData();
+                    formData.append("email", credentials.email);
+                    formData.append("password", credentials.password);
+
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://talk-o-app-production.up.railway.app'}/login`, {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    if (res.ok) {
+                        const user = await res.json();
+                        return user; // { id, email, name, access_token }
+                    }
+                    return null;
+                } catch (e) {
+                    console.error("Login authorization failed", e);
+                    return null;
+                }
+            }
+        })
     ],
     pages: {
         signIn: '/login',
     },
     callbacks: {
-        async jwt({ token, account }: { token: any, account: any }) {
+        async jwt({ token, account, user }: { token: any, account: any, user?: any }) {
             if (account) {
                 token.provider = account.provider;
+            }
+            if (user) {
+                token.userId = user.id;
             }
             return token;
         },
         async session({ session, token }: { session: any, token: any }) {
-            // Send user to backend to ensure they exist in our DB
-            try {
-                if (session?.user?.email) {
-                    let provider = token.provider || "credentials";
-                    if (provider === "azure-ad") provider = "microsoft";
+            if (token.userId) {
+                session.user.id = token.userId;
+            }
 
-                    // Fix: Added missing parentheses for fetch call
+            // Sync OAuth users with backend
+            if (token.provider === "google" && session?.user?.email) {
+                try {
                     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://talk-o-app-production.up.railway.app'}/users`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             email: session.user.email,
                             name: session.user.name || "User",
-                            provider: provider,
+                            provider: "google",
                             image: session.user.image
                         })
                     });
@@ -41,9 +75,9 @@ export const authOptions: NextAuthOptions = {
                         const userData = await res.json();
                         session.user.id = userData.id;
                     }
+                } catch (e) {
+                    console.error("Failed to sync OAuth user with backend", e);
                 }
-            } catch (e) {
-                console.error("Failed to sync user with backend", e);
             }
             return session;
         }

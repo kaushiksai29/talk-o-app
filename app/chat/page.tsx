@@ -27,66 +27,52 @@ function ChatInterface() {
     const personaName = isSage ? "Sage" : "Stargirl";
     const PersonaIcon = isSage ? SageIcon : StargirlIcon;
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const [user, setUser] = useState<{ id: string; name: string; email: string } | null>(null);
     const [messages, setMessages] = useState<{ role: 'user' | 'assistant', content: string, isStreaming?: boolean }[]>([]);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const [isHistoryLoaded, setIsHistoryLoaded] = useState(false);
-    const [guestId, setGuestId] = useState<string>("");
 
-    // Initialize Guest ID
+    // Auth Guard
     useEffect(() => {
-        let id = localStorage.getItem("talk-o-guest-id");
-        if (!id) {
-            id = crypto.randomUUID();
-            localStorage.setItem("talk-o-guest-id", id);
+        if (status === "unauthenticated") {
+            router.push(`/login?callbackUrl=${encodeURIComponent(window.location.href)}`);
         }
-        setGuestId(id);
-    }, []);
+    }, [status, router]);
 
     // Fetch User & History
     useEffect(() => {
         const init = async () => {
-            let currentUserId = "";
+            if (status !== "authenticated" || !session?.user?.email) return;
 
-            if (session?.user?.email) {
-                // Logged in user logic...
-                let userId = (session.user as any).id;
-                let userName = session.user.name || "User";
+            let currentUserId = (session.user as any).id;
+            let userName = session.user.name || "User";
 
-                if (!userId) {
-                    const { data: profile } = await supabase
-                        .from('profiles')
-                        .select('id, first_name, last_name')
-                        .eq('email', session.user.email)
-                        .single();
+            if (!currentUserId) {
+                // Fallback for older profiles without ID in session
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('id, first_name, last_name')
+                    .eq('email', session.user.email)
+                    .single();
 
-                    if (profile) {
-                        userId = profile.id;
-                        userName = `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || userName;
-                    }
-                }
-
-                if (userId) {
-                    currentUserId = userId;
-                    const userData = {
-                        id: userId,
-                        name: userName,
-                        email: session.user.email || ""
-                    };
-                    setUser(userData);
+                if (profile) {
+                    currentUserId = profile.id;
+                    userName = `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || userName;
                 }
             }
 
-            // If no logged in user, use guest ID
-            if (!currentUserId && guestId) {
-                currentUserId = guestId;
-            }
-
-            // Fetch History
             if (currentUserId) {
+                const userData = {
+                    id: currentUserId,
+                    name: userName,
+                    email: session.user.email || ""
+                };
+                setUser(userData);
+
+                // Fetch History
                 try {
                     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app"}/history/${currentUserId}`);
                     if (res.ok) {
@@ -125,10 +111,10 @@ function ChatInterface() {
             setIsHistoryLoaded(true);
         };
 
-        if (guestId) {
+        if (status === "authenticated") {
             init();
         }
-    }, [session, model, isSage, guestId]);
+    }, [session, status, model, isSage]);
 
     // Auto-scroll to bottom when messages change
     useEffect(() => {
