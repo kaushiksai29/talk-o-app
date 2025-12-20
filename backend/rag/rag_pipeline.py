@@ -2,6 +2,8 @@ import random
 import time
 import os
 import re
+import random
+import time
 import voyageai
 from anthropic import Anthropic
 from groq import Groq
@@ -278,11 +280,32 @@ Get to the point, then stop."""
             try:
                 print(f"ATTEMPTING: Together.ai (kaushiksai29_d9a7/stargirl-qwen25-14b)...")
                 
+                # Add variety instruction to prevent repetitive responses
+                variety_styles = [
+                    "Respond with pure validation, no questions.",
+                    "Ask one curious question about what happened before.",
+                    "Suggest a tiny physical action.",
+                    "Just sit with them, minimal words.",
+                    "Be gently playful.",
+                    "Reflect back what you heard.",
+                    "Share a brief observation.",
+                ]
+                
+                # Add variety instruction as a system message
+                messages_with_variety = messages.copy()
+                messages_with_variety.append({
+                    "role": "system", 
+                    "content": f"[Style hint: {random.choice(variety_styles)}]"
+                })
+                
                 response = together_client.chat.completions.create(
                     model="kaushiksai29_d9a7/stargirl-qwen25-14b",
-                    messages=messages,
+                    messages=messages_with_variety,
                     max_tokens=250,
-                    temperature=0.85,
+                    temperature=1.0,           # Increased from 0.85
+                    top_p=0.9,                 # Add nucleus sampling
+                    repetition_penalty=1.2,    # Penalize repetition
+                    seed=random.randint(1, 100000),  # Random seed busts cache
                 )
                 answer = response.choices[0].message.content
                 used_model = "together-stargirl-qwen25-14b"
