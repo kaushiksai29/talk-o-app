@@ -34,7 +34,6 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const router = useRouter();
     const [isMobile, setIsMobile] = useState(false);
-    const [guestId, setGuestId] = useState<string>("");
 
     // Handle resize - just to detect mobile state
     useEffect(() => {
@@ -49,7 +48,6 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
 
         // Initial check
         handleResize();
-        setGuestId(localStorage.getItem("talk-o-guest-id") || "");
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -70,7 +68,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
             <SettingsModal
                 isOpen={isSettingsOpen}
                 onClose={() => setIsSettingsOpen(false)}
-                userId={(session?.user as any)?.id || session?.user?.email || guestId}
+                userId={(session?.user as any)?.id || session?.user?.email}
             />
             {/* Menu Button (Visible on all screens now) */}
             <button
@@ -107,7 +105,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
 
                     <div className="flex-1 min-w-0">
                         <h3 className="font-serif font-bold text-coffee-dark dark:text-cream-50 truncate">
-                            {session?.user?.name || (guestId ? "Guest" : "User")}
+                            {session?.user?.name || "User"}
                         </h3>
                         {/* Removed Free Plan as requested */}
                     </div>

@@ -134,7 +134,6 @@ function ChatInterface() {
         setMessages(prev => [...prev, { role: 'assistant', content: "", isStreaming: true }]);
 
         try {
-            // Construct guest email if using guest ID
             const effectiveUserId = user?.id || session?.user?.email || null;
 
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app";
