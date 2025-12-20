@@ -135,7 +135,7 @@ function ChatInterface() {
 
         try {
             // Construct guest email if using guest ID
-            const effectiveUserId = user?.id || session?.user?.email || (guestId ? `guest_${guestId}@talk-o.app` : null);
+            const effectiveUserId = user?.id || session?.user?.email || null;
 
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app";
             const res = await fetch(`${apiUrl}/chat`, {
