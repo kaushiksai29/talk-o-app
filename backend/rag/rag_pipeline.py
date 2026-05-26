@@ -10,6 +10,7 @@ from groq import Groq
 from openai import OpenAI
 from supabase import create_client, Client
 from dotenv import load_dotenv
+from langsmith import traceable
 
 # Load env
 load_dotenv() # Load from root .env if available
@@ -136,6 +137,7 @@ You're just there. That's it."""
     
     return results
 
+@traceable(run_type="chain", name="TalkO_RAG")
 def run_rag(query, persona="stargirl", history=[]):
     print(f"--- RAG Start: {query} ({persona}) ---")
     
