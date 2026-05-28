@@ -22,7 +22,7 @@ try:
                 "content": "Hello",
             }
         ],
-        model="llama-3.1-70b-versatile",
+        model="llama-3.3-70b-versatile",
     )
     print("Success!")
     print(chat_completion.choices[0].message.content)
