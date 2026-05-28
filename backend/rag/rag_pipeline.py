@@ -138,19 +138,43 @@ You're just there. That's it."""
     return results
 
 @traceable(run_type="chain", name="TalkO_RAG")
-def run_rag(query, persona="stargirl", history=[]):
+def run_rag(query, persona="stargirl", history=None):
+    if history is None:
+        history = []
     print(f"--- RAG Start: {query} ({persona}) ---")
-    
+
     retrieved_context = ""
     sources = []
-    query_embedding = None
 
-    # EMERGENCY: RAG DISABLED
-    # User reported RAG poisoning. Skipping retrieval to test baseline persona performance.
-    print("Skipping retrieval (RAG DISABLED)")
-    retrieved_context = ""
-    
-    # ... (Skipping embedding/retrieval code for brevity as it's commented out) ...
+    # RAG retrieval — Sage only, with similarity guard to prevent context poisoning.
+    # Stargirl is purely empathetic and does not benefit from factual retrieval.
+    SIMILARITY_THRESHOLD = 0.75
+    if persona == "sage" and vo and supabase:
+        try:
+            result = vo.embed([query], model="voyage-3", input_type="query")
+            query_embedding = result.embeddings[0]
+
+            search_result = supabase.rpc(
+                "match_documents",
+                {
+                    "query_embedding": query_embedding,
+                    "similarity_threshold": SIMILARITY_THRESHOLD,
+                    "match_count": 3,
+                    "filter": {"persona": "sage"},
+                },
+            ).execute()
+
+            if search_result.data:
+                sources = [r["content"] for r in search_result.data]
+                retrieved_context = "\n".join(sources)
+                print(f"RAG: injecting {len(sources)} chunks (similarity >= {SIMILARITY_THRESHOLD})")
+            else:
+                print("RAG: no chunks above threshold — using pure persona")
+        except Exception as e:
+            print(f"RAG retrieval failed, proceeding without context: {e}")
+            retrieved_context = ""
+    else:
+        print(f"RAG: skipped for persona={persona}")
 
     # 4. Generate Response
     answer = ""
@@ -403,7 +427,7 @@ Get to the point, then stop."""
         "model": used_model
     }
 
-def generate_response(query, persona, history=[]):
+def generate_response(query, persona, history=None):
     """Wrapper for run_rag that returns just the answer string."""
-    result = run_rag(query, persona, history)
+    result = run_rag(query, persona, history or [])
     return result["answer"]
