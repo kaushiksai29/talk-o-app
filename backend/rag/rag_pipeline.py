@@ -304,7 +304,7 @@ Get to the point, then stop."""
         # Primary: Together.ai with fine-tuned Stargirl model
         if together_client:
             try:
-                print(f"ATTEMPTING: Together.ai (kaushiksai29_d9a7/stargirl-qwen25-14b)...")
+                print("ATTEMPTING: Together.ai (Mistral 7B + stargirl-mistral-7b LoRA)...")
                 
                 # Add variety instruction to prevent repetitive responses
                 variety_styles = [
@@ -324,17 +324,20 @@ Get to the point, then stop."""
                     "content": f"[Style hint: {random.choice(variety_styles)}]"
                 })
                 
+                # Mistral 7B base + Stargirl LoRA pulled from HuggingFace at inference time.
+                # No dedicated endpoint required — Together bills per-token only.
                 response = together_client.chat.completions.create(
-                    model="kaushiksai29_d9a7/stargirl-qwen25-14b",
+                    model="mistralai/Mistral-7B-Instruct-v0.3",
+                    extra_body={"lora": "kash-on-the-dash/stargirl-mistral-7b"},
                     messages=messages_with_variety,
                     max_tokens=250,
-                    temperature=1.0,           # Increased from 0.85
-                    top_p=0.9,                 # Add nucleus sampling
-                    repetition_penalty=1.2,    # Penalize repetition
-                    seed=random.randint(1, 100000),  # Random seed busts cache
+                    temperature=1.0,
+                    top_p=0.9,
+                    repetition_penalty=1.2,
+                    seed=random.randint(1, 100000),
                 )
                 answer = response.choices[0].message.content
-                used_model = "together-stargirl-qwen25-14b"
+                used_model = "together-mistral-7b+stargirl-lora"
                 print("SUCCESS: Together.ai (Stargirl) response received.")
                 
             except Exception as e:
@@ -387,7 +390,7 @@ Get to the point, then stop."""
             if not claude:
                 raise Exception("ANTHROPIC_API_KEY not set - no fallback available")
 
-            print(f"Calling Claude 3.5 Haiku (Fallback)...")
+            print("Calling Claude Haiku 4.5 (Fallback)...")
             # Claude expects a different format, but for simplicity let's try to adapt
             # or just use the simple format for fallback
             claude_messages = []
@@ -398,14 +401,14 @@ Get to the point, then stop."""
             claude_messages.append({"role": "user", "content": f"CONTEXT:\n{retrieved_context}\n\nUSER:\n{query}"})
 
             message = claude.messages.create(
-                model="claude-3-5-haiku-latest",
+                model="claude-haiku-4-5",
                 max_tokens=1024,
                 temperature=0.3,
                 system=system_prompt,
                 messages=claude_messages
             )
             answer = message.content[0].text
-            used_model = "claude-3-5-haiku-latest (fallback)"
+            used_model = "claude-haiku-4-5 (fallback)"
          except Exception as e:
             print(f"Fallback failed: {e}")
             answer = "I'm having trouble connecting right now. Please check that API keys are configured."
