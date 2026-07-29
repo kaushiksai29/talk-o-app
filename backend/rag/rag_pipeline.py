@@ -38,7 +38,8 @@ if not GROQ_API_KEY:
     print("WARNING: GROQ_API_KEY missing. Sage will fallback to Claude Haiku.")
 
 if not OPENAI_API_KEY:
-    print("WARNING: OPENAI_API_KEY missing. Stargirl will fail.")
+    print("INFO: OPENAI_API_KEY missing. (Not required if using Together.ai or Groq)")
+
 
 if not TOGETHER_API_KEY:
     print("WARNING: TOGETHER_API_KEY missing. Together.ai inference disabled.")
@@ -107,14 +108,15 @@ You're just there. That's it."""
     if together_client:
         try:
             response = together_client.chat.completions.create(
-                model="kaushiksai29_d9a7/stargirl-qwen25-14b",
+                model="mistralai/Mistral-7B-Instruct-v0.3",
+                lora="kash-on-the-dash/stargirl-mistral-7b",
                 messages=messages,
                 max_tokens=250,
                 temperature=0.85
             )
             results["together"] = {
                 "response": response.choices[0].message.content,
-                "model": "together-stargirl-qwen25-14b"
+                "model": "mistralai/Mistral-7B-Instruct-v0.3+kash-on-the-dash/stargirl-mistral-7b"
             }
         except Exception as e:
             results["together"] = {"error": str(e)}
@@ -304,7 +306,7 @@ Get to the point, then stop."""
         # Primary: Together.ai with fine-tuned Stargirl model
         if together_client:
             try:
-                print("ATTEMPTING: Together.ai (Mistral 7B + stargirl-mistral-7b LoRA)...")
+                print(f"ATTEMPTING: Together.ai (mistralai/Mistral-7B-Instruct-v0.3 + kash-on-the-dash/stargirl-mistral-7b)...")
                 
                 # Add variety instruction to prevent repetitive responses
                 variety_styles = [
@@ -328,7 +330,7 @@ Get to the point, then stop."""
                 # No dedicated endpoint required — Together bills per-token only.
                 response = together_client.chat.completions.create(
                     model="mistralai/Mistral-7B-Instruct-v0.3",
-                    extra_body={"lora": "kash-on-the-dash/stargirl-mistral-7b"},
+                    lora="kash-on-the-dash/stargirl-mistral-7b",
                     messages=messages_with_variety,
                     max_tokens=250,
                     temperature=1.0,
@@ -337,7 +339,7 @@ Get to the point, then stop."""
                     seed=random.randint(1, 100000),
                 )
                 answer = response.choices[0].message.content
-                used_model = "together-mistral-7b+stargirl-lora"
+                used_model = "mistral-7b-stargirl-lora"
                 print("SUCCESS: Together.ai (Stargirl) response received.")
                 
             except Exception as e:
