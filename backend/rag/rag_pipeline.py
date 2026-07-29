@@ -2,15 +2,20 @@ import random
 import time
 import os
 import re
-import random
-import time
 import voyageai
 from anthropic import Anthropic
 from groq import Groq
 from openai import OpenAI
 from supabase import create_client, Client
 from dotenv import load_dotenv
-from langsmith import traceable
+
+try:
+    from langsmith import traceable
+except ImportError:
+    def traceable(*args, **kwargs):
+        def decorator(func):
+            return func
+        return decorator
 
 # Load env
 load_dotenv() # Load from root .env if available
@@ -40,16 +45,44 @@ if not GROQ_API_KEY:
 if not OPENAI_API_KEY:
     print("INFO: OPENAI_API_KEY missing. (Not required if using Together.ai or Groq)")
 
-
 if not TOGETHER_API_KEY:
     print("WARNING: TOGETHER_API_KEY missing. Together.ai inference disabled.")
 
-# Initialize Clients - Only if keys exist
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
-vo = voyageai.Client(api_key=VOYAGE_API_KEY) if VOYAGE_API_KEY else None
-claude = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
-groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
-openai_client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
+# Initialize Clients - Safely handle missing/invalid credentials
+supabase: Client = None
+if SUPABASE_URL and SUPABASE_KEY:
+    try:
+        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Supabase client: {e}")
+
+vo = None
+if VOYAGE_API_KEY:
+    try:
+        vo = voyageai.Client(api_key=VOYAGE_API_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Voyage client: {e}")
+
+claude = None
+if ANTHROPIC_API_KEY:
+    try:
+        claude = Anthropic(api_key=ANTHROPIC_API_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Anthropic client: {e}")
+
+groq_client = None
+if GROQ_API_KEY:
+    try:
+        groq_client = Groq(api_key=GROQ_API_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Groq client: {e}")
+
+openai_client = None
+if OPENAI_API_KEY:
+    try:
+        openai_client = OpenAI(api_key=OPENAI_API_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize OpenAI client: {e}")
 
 # Together.ai client
 together_client = None
