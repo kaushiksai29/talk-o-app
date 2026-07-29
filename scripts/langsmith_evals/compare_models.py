@@ -105,7 +105,7 @@ def _call_together(user_message: str, persona: str, model: str, lora: str = None
         "temperature": 0.85,
     }
     if lora:
-        kwargs["lora"] = lora
+        kwargs["extra_body"] = {"lora": lora}
     resp = client.chat.completions.create(**kwargs)
     return resp.choices[0].message.content
 

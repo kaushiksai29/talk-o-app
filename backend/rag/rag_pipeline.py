@@ -363,7 +363,7 @@ Get to the point, then stop."""
                 # No dedicated endpoint required — Together bills per-token only.
                 response = together_client.chat.completions.create(
                     model="mistralai/Mistral-7B-Instruct-v0.3",
-                    lora="kash-on-the-dash/stargirl-mistral-7b",
+                    extra_body={"lora": "kash-on-the-dash/stargirl-mistral-7b"},
                     messages=messages_with_variety,
                     max_tokens=250,
                     temperature=1.0,
