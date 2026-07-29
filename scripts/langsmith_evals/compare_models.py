@@ -91,13 +91,37 @@ def _claude_predictor(model: str):
     return predict
 
 
+@traceable(run_type="llm", name="together_call")
+def _call_together(user_message: str, persona: str, model: str, lora: str = None) -> str:
+    from together import Together
+    client = Together(api_key=os.environ.get("TOGETHER_API_KEY"))
+    kwargs = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": _system(persona)},
+            {"role": "user", "content": user_message},
+        ],
+        "max_tokens": 300,
+        "temperature": 0.85,
+    }
+    if lora:
+        kwargs["lora"] = lora
+    resp = client.chat.completions.create(**kwargs)
+    return resp.choices[0].message.content
+
+
+def _together_predictor(model: str, lora: str = None):
+    def predict(inputs: dict) -> dict:
+        return {"output": _call_together(inputs["user_message"], inputs["persona"], model, lora)}
+    return predict
+
+
 # ── Experiment registry ───────────────────────────────────────────────────────
 
 EXPERIMENTS = [
-    ("Groq-Llama3-8B",    _groq_predictor("llama3-8b-8192")),
-    ("Groq-Llama3.3-70B", _groq_predictor("llama-3.3-70b-versatile")),
-    ("Claude-Sonnet-4-6", _claude_predictor("claude-sonnet-4-6")),
-    ("Claude-Opus-4-7",   _claude_predictor("claude-opus-4-7")),
+    ("Together-Mistral7B-LoRA", _together_predictor("mistralai/Mistral-7B-Instruct-v0.3", "kash-on-the-dash/stargirl-mistral-7b")),
+    ("Groq-Llama3.3-70B",       _groq_predictor("llama-3.3-70b-versatile")),
+    ("Claude-Haiku-4.5",        _claude_predictor("claude-haiku-4-5-20251001")),
 ]
 
 DATASET = "TalkO_Evaluation_Dataset_v1"
