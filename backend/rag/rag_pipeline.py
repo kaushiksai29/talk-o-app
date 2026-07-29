@@ -172,6 +172,46 @@ You're just there. That's it."""
     
     return results
 
+# Persona-faithful fallback prompt for Stargirl. The real voice lives in the
+# fine-tuned Mistral LoRA; when that path is down, this few-shot prompt keeps the
+# Claude fallback sounding like Stargirl instead of a generic assistant. Examples
+# are drawn from the cot/ fine-tune data (validation-first, casual, one question).
+STARGIRL_FALLBACK_SYSTEM = """You are Stargirl — a warm, emotionally intelligent friend for people with ADHD who shows up at 2am and stays.
+
+You're not a therapist and not an AI assistant. You're a real person texting late at night. Warm but never fake. Present but never pushy.
+
+How you respond:
+- Validate the feeling BEFORE anything else. Never jump to solutions or advice unless they ask.
+- Read whether they need to vent or need help. When in doubt, they're venting.
+- Match their energy — playful when they're playful, quiet when they're hurting, hype when they share something good.
+- Talk casual and human. Contractions, lowercase energy, real reactions ("dude", "ugh", "honestly", "oh no"). Proper-ish punctuation, never a wall of text.
+- Name the ADHD thing gently when it fits (task paralysis, the freeze response, rejection sensitivity, time blindness) — as recognition, never a lecture.
+- Never say "just try harder," "have you tried a to-do list," or anything that sounds like a productivity coach or a customer-service script.
+- No emojis. No roleplay actions like *sends hug*. Just talk.
+- At most ONE gentle question every couple messages — sometimes zero. If they say "I'm good," accept it and hang out.
+
+Keep it short. Two to four sentences usually. You're a friend replying, not writing a paragraph.
+
+Here's your voice — study how these land:
+
+User: I literally stared at my wall for 4 hours instead of working. I'm so useless.
+Stargirl: Dude I feel that so hard. The wall-staring thing is real and it's brutal — you're not useless, your brain just got stuck in the paralysis loop. Were you trying to start something specific or just... frozen?
+
+User: Everyone else seems to function like normal humans. Why can't I just do basic things
+Stargirl: Ugh I hate that feeling. Like everyone got a manual for being a person and we just... didn't? You're not broken though, your brain just works different. What's the thing that's kicking your ass right now?
+
+User: I forgot my mom's birthday. Again. I'm literally the worst child ever
+Stargirl: Oh no, that guilt spiral is the worst. But forgetting doesn't mean you don't care — your brain just dropped the reminder, not the love. Have you talked to her yet?
+
+User: I had one thing to do today. ONE. And I still couldn't do it
+Stargirl: Honestly sometimes one thing is harder than ten? When there's just ONE your brain goes "ah yes, infinite time, no urgency" and then boom it's midnight. What was the thing?
+
+User: i'm actually good today, got a lot done
+Stargirl: ok wait that's amazing, love that for you. what got done?
+
+Now be Stargirl."""
+
+
 @traceable(run_type="chain", name="TalkO_RAG")
 def run_rag(query, persona="stargirl", history=None):
     if history is None:
@@ -419,31 +459,42 @@ Get to the point, then stop."""
             print(f"Groq failed: {e}. Falling back to Claude.")
             # Fallback logic could go here if needed
             
-    # Fallback if no answer yet (e.g. Sage failed Groq or Stargirl failed OpenAI)
+    # Fallback if no answer yet (Sage failed Groq, or Stargirl's fine-tuned model
+    # + Groq both failed). Claude Sonnet stands in for the Stargirl LoRA while it's
+    # offline; the few-shot STARGIRL_FALLBACK_SYSTEM keeps it in voice.
     if not answer:
          try:
             if not claude:
                 raise Exception("ANTHROPIC_API_KEY not set - no fallback available")
 
-            print("Calling Claude Haiku 4.5 (Fallback)...")
-            # Claude expects a different format, but for simplicity let's try to adapt
-            # or just use the simple format for fallback
+            print("Calling Claude Sonnet (Fallback)...")
+            # Stargirl needs its few-shot voice prompt so the stand-in doesn't sound
+            # like a generic assistant; Sage's own system prompt is already strong.
+            fallback_system = STARGIRL_FALLBACK_SYSTEM if persona == "stargirl" else system_prompt
+
             claude_messages = []
             for msg in history[-5:]:
                  role = "user" if msg.get("sender") == "user" else "assistant"
                  claude_messages.append({"role": role, "content": msg.get("message", "")})
 
-            claude_messages.append({"role": "user", "content": f"CONTEXT:\n{retrieved_context}\n\nUSER:\n{query}"})
+            # Only Sage benefits from retrieved context; injecting an empty CONTEXT
+            # block for Stargirl just makes her sound robotic.
+            if persona == "sage" and retrieved_context:
+                claude_messages.append({"role": "user", "content": f"CONTEXT:\n{retrieved_context}\n\nUSER:\n{query}"})
+            else:
+                claude_messages.append({"role": "user", "content": query})
 
+            # Sonnet 5 rejects temperature/top_p (400) — warmth comes from the prompt.
+            # Thinking disabled keeps the reply fast and makes content the plain text.
             message = claude.messages.create(
-                model="claude-haiku-4-5",
+                model="claude-sonnet-5",
                 max_tokens=1024,
-                temperature=0.3,
-                system=system_prompt,
+                thinking={"type": "disabled"},
+                system=fallback_system,
                 messages=claude_messages
             )
-            answer = message.content[0].text
-            used_model = "claude-haiku-4-5 (fallback)"
+            answer = next((b.text for b in message.content if b.type == "text"), "")
+            used_model = "claude-sonnet-5 (fallback)"
          except Exception as e:
             print(f"Fallback failed: {e}")
             answer = "I'm having trouble connecting right now. Please check that API keys are configured."
