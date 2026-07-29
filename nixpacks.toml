@@ -2,8 +2,7 @@
 nixPkgs = ["python310"]
 
 [phases.install]
-# Cache bust: 2024-12-11-v3-force-rebuild
-cmds = ["pip install --upgrade pip", "pip install --no-cache-dir -r backend/requirements.txt"]
+cmds = ["pip install --upgrade pip", "pip install --no-cache-dir -r requirements.txt"]
 
 [start]
 cmd = "python run_server.py"
