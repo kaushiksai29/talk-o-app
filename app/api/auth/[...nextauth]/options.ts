@@ -22,7 +22,8 @@ export const authOptions: NextAuthOptions = {
                     formData.append("email", credentials.email);
                     formData.append("password", credentials.password);
 
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://talk-o-app-production.up.railway.app'}/login`, {
+                    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app";
+                    const res = await fetch(`${apiUrl}/login`, {
                         method: "POST",
                         body: formData,
                     });
