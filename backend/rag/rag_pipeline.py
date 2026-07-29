@@ -2,14 +2,20 @@ import random
 import time
 import os
 import re
-import random
-import time
 import voyageai
 from anthropic import Anthropic
 from groq import Groq
 from openai import OpenAI
 from supabase import create_client, Client
 from dotenv import load_dotenv
+
+try:
+    from langsmith import traceable
+except ImportError:
+    def traceable(*args, **kwargs):
+        def decorator(func):
+            return func
+        return decorator
 
 # Load env
 load_dotenv() # Load from root .env if available
@@ -37,17 +43,46 @@ if not GROQ_API_KEY:
     print("WARNING: GROQ_API_KEY missing. Sage will fallback to Claude Haiku.")
 
 if not OPENAI_API_KEY:
-    print("WARNING: OPENAI_API_KEY missing. Stargirl will fail.")
+    print("INFO: OPENAI_API_KEY missing. (Not required if using Together.ai or Groq)")
 
 if not TOGETHER_API_KEY:
     print("WARNING: TOGETHER_API_KEY missing. Together.ai inference disabled.")
 
-# Initialize Clients - Only if keys exist
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
-vo = voyageai.Client(api_key=VOYAGE_API_KEY) if VOYAGE_API_KEY else None
-claude = Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
-groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
-openai_client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
+# Initialize Clients - Safely handle missing/invalid credentials
+supabase: Client = None
+if SUPABASE_URL and SUPABASE_KEY:
+    try:
+        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Supabase client: {e}")
+
+vo = None
+if VOYAGE_API_KEY:
+    try:
+        vo = voyageai.Client(api_key=VOYAGE_API_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Voyage client: {e}")
+
+claude = None
+if ANTHROPIC_API_KEY:
+    try:
+        claude = Anthropic(api_key=ANTHROPIC_API_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Anthropic client: {e}")
+
+groq_client = None
+if GROQ_API_KEY:
+    try:
+        groq_client = Groq(api_key=GROQ_API_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize Groq client: {e}")
+
+openai_client = None
+if OPENAI_API_KEY:
+    try:
+        openai_client = OpenAI(api_key=OPENAI_API_KEY)
+    except Exception as e:
+        print(f"ERROR: Failed to initialize OpenAI client: {e}")
 
 # Together.ai client
 together_client = None
@@ -106,14 +141,15 @@ You're just there. That's it."""
     if together_client:
         try:
             response = together_client.chat.completions.create(
-                model="kaushiksai29_d9a7/stargirl-qwen25-14b",
+                model="mistralai/Mistral-7B-Instruct-v0.3",
+                lora="kash-on-the-dash/stargirl-mistral-7b",
                 messages=messages,
                 max_tokens=250,
                 temperature=0.85
             )
             results["together"] = {
                 "response": response.choices[0].message.content,
-                "model": "together-stargirl-qwen25-14b"
+                "model": "mistralai/Mistral-7B-Instruct-v0.3+kash-on-the-dash/stargirl-mistral-7b"
             }
         except Exception as e:
             results["together"] = {"error": str(e)}
@@ -136,19 +172,44 @@ You're just there. That's it."""
     
     return results
 
-def run_rag(query, persona="stargirl", history=[]):
+@traceable(run_type="chain", name="TalkO_RAG")
+def run_rag(query, persona="stargirl", history=None):
+    if history is None:
+        history = []
     print(f"--- RAG Start: {query} ({persona}) ---")
-    
+
     retrieved_context = ""
     sources = []
-    query_embedding = None
 
-    # EMERGENCY: RAG DISABLED
-    # User reported RAG poisoning. Skipping retrieval to test baseline persona performance.
-    print("Skipping retrieval (RAG DISABLED)")
-    retrieved_context = ""
-    
-    # ... (Skipping embedding/retrieval code for brevity as it's commented out) ...
+    # RAG retrieval — Sage only, with similarity guard to prevent context poisoning.
+    # Stargirl is purely empathetic and does not benefit from factual retrieval.
+    SIMILARITY_THRESHOLD = 0.75
+    if persona == "sage" and vo and supabase:
+        try:
+            result = vo.embed([query], model="voyage-3", input_type="query")
+            query_embedding = result.embeddings[0]
+
+            search_result = supabase.rpc(
+                "match_documents",
+                {
+                    "query_embedding": query_embedding,
+                    "similarity_threshold": SIMILARITY_THRESHOLD,
+                    "match_count": 3,
+                    "filter": {"persona": "sage"},
+                },
+            ).execute()
+
+            if search_result.data:
+                sources = [r["content"] for r in search_result.data]
+                retrieved_context = "\n".join(sources)
+                print(f"RAG: injecting {len(sources)} chunks (similarity >= {SIMILARITY_THRESHOLD})")
+            else:
+                print("RAG: no chunks above threshold — using pure persona")
+        except Exception as e:
+            print(f"RAG retrieval failed, proceeding without context: {e}")
+            retrieved_context = ""
+    else:
+        print(f"RAG: skipped for persona={persona}")
 
     # 4. Generate Response
     answer = ""
@@ -278,7 +339,7 @@ Get to the point, then stop."""
         # Primary: Together.ai with fine-tuned Stargirl model
         if together_client:
             try:
-                print(f"ATTEMPTING: Together.ai (kaushiksai29_d9a7/stargirl-qwen25-14b)...")
+                print(f"ATTEMPTING: Together.ai (mistralai/Mistral-7B-Instruct-v0.3 + kash-on-the-dash/stargirl-mistral-7b)...")
                 
                 # Add variety instruction to prevent repetitive responses
                 variety_styles = [
@@ -298,17 +359,20 @@ Get to the point, then stop."""
                     "content": f"[Style hint: {random.choice(variety_styles)}]"
                 })
                 
+                # Mistral 7B base + Stargirl LoRA pulled from HuggingFace at inference time.
+                # No dedicated endpoint required — Together bills per-token only.
                 response = together_client.chat.completions.create(
-                    model="kaushiksai29_d9a7/stargirl-qwen25-14b",
+                    model="mistralai/Mistral-7B-Instruct-v0.3",
+                    extra_body={"lora": "kash-on-the-dash/stargirl-mistral-7b"},
                     messages=messages_with_variety,
                     max_tokens=250,
-                    temperature=1.0,           # Increased from 0.85
-                    top_p=0.9,                 # Add nucleus sampling
-                    repetition_penalty=1.2,    # Penalize repetition
-                    seed=random.randint(1, 100000),  # Random seed busts cache
+                    temperature=1.0,
+                    top_p=0.9,
+                    repetition_penalty=1.2,
+                    seed=random.randint(1, 100000),
                 )
                 answer = response.choices[0].message.content
-                used_model = "together-stargirl-qwen25-14b"
+                used_model = "mistral-7b-stargirl-lora"
                 print("SUCCESS: Together.ai (Stargirl) response received.")
                 
             except Exception as e:
@@ -361,7 +425,7 @@ Get to the point, then stop."""
             if not claude:
                 raise Exception("ANTHROPIC_API_KEY not set - no fallback available")
 
-            print(f"Calling Claude 3.5 Haiku (Fallback)...")
+            print("Calling Claude Haiku 4.5 (Fallback)...")
             # Claude expects a different format, but for simplicity let's try to adapt
             # or just use the simple format for fallback
             claude_messages = []
@@ -372,14 +436,14 @@ Get to the point, then stop."""
             claude_messages.append({"role": "user", "content": f"CONTEXT:\n{retrieved_context}\n\nUSER:\n{query}"})
 
             message = claude.messages.create(
-                model="claude-3-5-haiku-latest",
+                model="claude-haiku-4-5",
                 max_tokens=1024,
                 temperature=0.3,
                 system=system_prompt,
                 messages=claude_messages
             )
             answer = message.content[0].text
-            used_model = "claude-3-5-haiku-latest (fallback)"
+            used_model = "claude-haiku-4-5 (fallback)"
          except Exception as e:
             print(f"Fallback failed: {e}")
             answer = "I'm having trouble connecting right now. Please check that API keys are configured."
@@ -401,7 +465,7 @@ Get to the point, then stop."""
         "model": used_model
     }
 
-def generate_response(query, persona, history=[]):
+def generate_response(query, persona, history=None):
     """Wrapper for run_rag that returns just the answer string."""
-    result = run_rag(query, persona, history)
+    result = run_rag(query, persona, history or [])
     return result["answer"]

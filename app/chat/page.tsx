@@ -74,7 +74,9 @@ function ChatInterface() {
 
                 // Fetch History
                 try {
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app"}/history/${currentUserId}`);
+                    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
+                    const historyEndpoint = baseUrl.endsWith("/api") ? `${baseUrl}/history/${currentUserId}` : `${baseUrl}/history/${currentUserId}`;
+                    const res = await fetch(historyEndpoint);
                     if (res.ok) {
                         const history = await res.json();
                         // Filter by current persona and map to UI format
@@ -136,8 +138,9 @@ function ChatInterface() {
         try {
             const effectiveUserId = user?.id || session?.user?.email || null;
 
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app";
-            const res = await fetch(`${apiUrl}/chat`, {
+            const baseUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
+            const chatEndpoint = baseUrl.endsWith("/api") ? `${baseUrl}/chat` : `${baseUrl}/chat`;
+            const res = await fetch(chatEndpoint, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -164,7 +167,7 @@ function ChatInterface() {
 
         } catch (error) {
             console.error("Chat error:", error);
-            const targetUrl = process.env.NEXT_PUBLIC_API_URL || "https://talk-o-app-production.up.railway.app";
+            const targetUrl = process.env.NEXT_PUBLIC_API_URL || "/api/chat";
             console.error(`Attempted to reach: ${targetUrl}`);
             setMessages(prev => {
                 const newMessages = [...prev];

@@ -16,9 +16,12 @@ anthropic==0.45.0
 groq==0.15.0
 openai==1.59.8
 together>=1.0.0
+langsmith>=0.1.0
 
 # Testing (optional - can be removed for production)
 # pytest==9.0.1
 # httpx==0.28.1
 
 requests==2.32.3
+langsmith>=0.1.0
+langchain>=0.1.0
