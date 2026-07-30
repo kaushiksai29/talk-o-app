@@ -224,6 +224,37 @@ Stargirl: ok wait that's amazing, love that for you. what got done?
 
 Now be Stargirl."""
 
+# Rotating per-reply nudge appended AFTER the cached system prefix (so it never
+# invalidates the prompt cache). Adds warmth + variety so replies in one session
+# don't feel same-y — the effect the old Together `variety_styles` gave us.
+STARGIRL_WARMTH_HINTS = [
+    "Open with a genuine, specific reaction to what they just said.",
+    "Mirror one of their own words back so they feel heard.",
+    "If they shared a win, hype it up first — match their energy before anything else.",
+    "It's okay to just sit with them and barely ask anything this time.",
+    "Be a little playful if the moment allows it.",
+    "Lead with plain reassurance that they're not broken or failing.",
+    "Skip the question this time — just let them know you're here.",
+]
+
+# Lightweight crisis guardrail. Deliberately specific phrases to avoid firing on
+# idioms ("this deadline is killing me"). When it matches, we GUARANTEE a resource
+# line is present in the reply rather than trusting the model to include one.
+CRISIS_RE = re.compile(
+    r"\b(kill(?:ing)?\s+myself|suicid\w*|want(?:ing)?\s+to\s+die|wanna\s+die|"
+    r"end(?:ing)?\s+(?:it\s+all|my\s+life)|don'?t\s+want\s+to\s+(?:be\s+here|live|exist|wake\s+up)|"
+    r"hurt(?:ing)?\s+myself|self[-\s]?harm|cut(?:ting)?\s+myself|"
+    r"no\s+reason\s+to\s+(?:live|go\s+on)|better\s+off\s+(?:dead|without\s+me))\b",
+    re.IGNORECASE,
+)
+
+CRISIS_RESOURCE = (
+    "\n\ni also want to make sure you're okay right now. if things feel like too much, "
+    "please reach someone who can be with you in this — in the US you can call or text 988 "
+    "(the Suicide & Crisis Lifeline) any time, and if you're in immediate danger please call "
+    "your local emergency number. i'm still right here."
+)
+
 
 @traceable(run_type="chain", name="TalkO_RAG")
 def run_rag(query, persona="stargirl", history=None):
@@ -483,7 +514,23 @@ Get to the point, then stop."""
             print("Calling Claude Sonnet (Fallback)...")
             # Stargirl needs its few-shot voice prompt so the stand-in doesn't sound
             # like a generic assistant; Sage's own system prompt is already strong.
-            fallback_system = STARGIRL_FALLBACK_SYSTEM if persona == "stargirl" else system_prompt
+            base_system = STARGIRL_FALLBACK_SYSTEM if persona == "stargirl" else system_prompt
+
+            # Prompt caching: the large persona prompt is byte-stable, so mark it as
+            # an ephemeral cache breakpoint — repeat calls within a session read it at
+            # ~10% cost instead of reprocessing ~1k tokens every time. The rotating
+            # warmth hint goes in a SECOND, uncached block AFTER the breakpoint, so
+            # per-reply variety never invalidates the cached prefix.
+            system_blocks = [{
+                "type": "text",
+                "text": base_system,
+                "cache_control": {"type": "ephemeral"},
+            }]
+            if persona == "stargirl":
+                system_blocks.append({
+                    "type": "text",
+                    "text": f"For this specific reply: {random.choice(STARGIRL_WARMTH_HINTS)}",
+                })
 
             claude_messages = []
             for msg in history[-5:]:
@@ -503,11 +550,17 @@ Get to the point, then stop."""
                 model="claude-sonnet-5",
                 max_tokens=1024,
                 thinking={"type": "disabled"},
-                system=fallback_system,
+                system=system_blocks,
                 messages=claude_messages
             )
             answer = next((b.text for b in message.content if b.type == "text"), "")
             used_model = "claude-sonnet-5 (fallback)"
+            try:
+                u = message.usage
+                print(f"Claude usage: in={u.input_tokens} cache_read={getattr(u,'cache_read_input_tokens',0)} "
+                      f"cache_write={getattr(u,'cache_creation_input_tokens',0)} out={u.output_tokens}")
+            except Exception:
+                pass
          except Exception as e:
             print(f"Fallback failed: {e}")
             answer = "I'm having trouble connecting right now. Please check that API keys are configured."
@@ -522,6 +575,16 @@ Get to the point, then stop."""
         answer = answer.strip()
         # Remove leading newlines
         answer = answer.lstrip('\n')
+
+    # Crisis guardrail: if the user's message signals self-harm risk, guarantee a
+    # concrete resource is attached regardless of what the model produced. Runs for
+    # both personas and independently of which model answered.
+    try:
+        if answer and CRISIS_RE.search(query or "") and "988" not in answer:
+            answer = answer + CRISIS_RESOURCE
+            print("GUARDRAIL: crisis language detected — appended safety resource.")
+    except Exception as e:
+        print(f"Crisis guardrail check failed (non-fatal): {e}")
 
     return {
         "answer": answer,
